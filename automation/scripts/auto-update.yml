@@ -1,0 +1,217 @@
+# GitHub Actions - 채용공고 자동 수집 + Markdown 생성
+# 파일 경로: automation/scripts/auto-update.yml
+# 실제 사용 시 .github/workflows/ 폴더에 복사하세요
+
+name: 채용공고 자동 수집 및 Markdown 생성
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'   # 매주 월요일 오전 8시 (KST 기준 UTC+9 고려)
+    - cron: '0 8 * * 4'   # 매주 목요일 오전 8시
+  workflow_dispatch:
+    inputs:
+      keyword:
+        description: '검색 키워드 (기본: 그래픽디자이너)'
+        required: false
+        default: '그래픽디자이너'
+      pages:
+        description: '수집 페이지 수 (기본: 5)'
+        required: false
+        default: '5'
+
+permissions:
+  contents: write
+
+env:
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  collect-jobs:
+    name: 채용공고 수집
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Python ${{ env.PYTHON_VERSION }} 설정
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: 의존성 설치
+        run: |
+          pip install --upgrade pip
+          pip install firecrawl-py python-dotenv anthropic pandas jinja2
+      
+      - name: 채용공고 수집 (Firecrawl)
+        id: collect
+        env:
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+          SEARCH_KEYWORD: ${{ github.event.inputs.keyword || '그래픽디자이너' }}
+          PAGES: ${{ github.event.inputs.pages || '5' }}
+        run: |
+          python << 'PYTHON_SCRIPT'
+          import os
+          import json
+          from datetime import datetime
+          from firecrawl import FirecrawlApp
+          
+          app = FirecrawlApp(api_key=os.getenv("FIRECRAWL_API_KEY"))
+          keyword = os.getenv("SEARCH_KEYWORD", "그래픽디자이너")
+          
+          keywords = [keyword, "UI디자이너", "브랜드디자이너", "콘텐츠디자이너"]
+          all_jobs = []
+          
+          for kw in keywords:
+              print(f"검색 중: {kw}")
+              try:
+                  results = app.search(
+                      query=f"{kw} 신입 채용 2026",
+                      params={'limit': 10, 'lang': 'ko'}
+                  )
+                  jobs = results.get('data', [])
+                  for job in jobs:
+                      job['keyword'] = kw
+                      job['collected_at'] = datetime.now().isoformat()
+                  all_jobs.extend(jobs)
+                  print(f"  → {len(jobs)}건 수집")
+              except Exception as e:
+                  print(f"  → 오류: {e}")
+          
+          os.makedirs("data/jobs", exist_ok=True)
+          date_str = datetime.now().strftime("%Y%m%d")
+          output_file = f"data/jobs/combined_{date_str}.json"
+          
+          with open(output_file, 'w', encoding='utf-8') as f:
+              json.dump({
+                  "collected_at": datetime.now().isoformat(),
+                  "total_count": len(all_jobs),
+                  "keywords": keywords,
+                  "jobs": all_jobs
+              }, f, ensure_ascii=False, indent=2)
+          
+          print(f"\n총 {len(all_jobs)}건 수집 완료: {output_file}")
+          
+          # GitHub Actions 출력 변수 설정
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f"count={len(all_jobs)}\n")
+              f.write(f"output_file={output_file}\n")
+          PYTHON_SCRIPT
+      
+      - name: Markdown 보고서 생성
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python << 'PYTHON_SCRIPT'
+          import os
+          import json
+          import glob
+          from datetime import datetime
+          
+          # 최신 수집 파일 로드
+          files = sorted(glob.glob("data/jobs/combined_*.json"), reverse=True)
+          if not files:
+              print("수집 파일 없음")
+              exit(0)
+          
+          with open(files[0], 'r', encoding='utf-8') as f:
+              data = json.load(f)
+          
+          jobs = data.get('jobs', [])
+          
+          # Markdown 보고서 생성
+          date_str = datetime.now().strftime("%Y년 %m월 %d일")
+          report = f"""# 채용공고 자동 수집 보고서
+          
+생성일: {date_str}
+수집 건수: {len(jobs)}건
+
+## 최신 채용공고 목록
+
+| 번호 | 제목 | URL |
+|------|------|-----|
+"""
+          for i, job in enumerate(jobs[:20], 1):
+              title = job.get('title', '제목없음')[:50]
+              url = job.get('url', '')
+              report += f"| {i} | {title} | [링크]({url}) |\n"
+          
+          report += f"""
+
+## 키워드별 수집 현황
+
+| 키워드 | 수집 건수 |
+|--------|---------|
+"""
+          from collections import Counter
+          keyword_counts = Counter(j.get('keyword', '') for j in jobs)
+          for kw, count in keyword_counts.items():
+              report += f"| {kw} | {count}건 |\n"
+          
+          os.makedirs("reports", exist_ok=True)
+          date_file = datetime.now().strftime("%Y%m%d")
+          with open(f"reports/jobs_{date_file}.md", 'w', encoding='utf-8') as f:
+              f.write(report)
+          
+          print(f"보고서 생성 완료: reports/jobs_{date_file}.md")
+          PYTHON_SCRIPT
+      
+      - name: 변경사항 커밋 및 푸시
+        run: |
+          git config user.name 'CGD Auto Bot'
+          git config user.email 'cgd-bot@users.noreply.github.com'
+          git add data/ reports/
+          git diff --staged --quiet || git commit -m "자동 수집: $(date '+%Y-%m-%d') - ${{ steps.collect.outputs.count }}건"
+          git push
+      
+      - name: 완료 알림 (슬랙 - 선택)
+        if: ${{ secrets.SLACK_WEBHOOK_URL != '' }}
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          custom_payload: |
+            {
+              "text": "채용공고 자동 수집 완료!\n수집 건수: ${{ steps.collect.outputs.count }}건\n날짜: ${{ github.event.head_commit.timestamp }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  generate-release:
+    name: 월간 릴리즈 생성 (매월 1일만)
+    runs-on: ubuntu-latest
+    needs: collect-jobs
+    if: github.event.schedule == '0 8 1 * *'
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: 월간 교육자료 패키징
+        run: |
+          MONTH=$(date '+%Y-%m')
+          mkdir -p release-temp
+          cp -r docs/ release-temp/
+          cp -r template/ release-temp/
+          cp -r prompt/ release-temp/
+          cp README.md release-temp/
+          zip -r "cgd-materials-${MONTH}.zip" release-temp/
+          echo "RELEASE_FILE=cgd-materials-${MONTH}.zip" >> $GITHUB_ENV
+          echo "RELEASE_TAG=v${MONTH}" >> $GITHUB_ENV
+      
+      - name: Release 생성
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          name: "CGD 교육자료 ${{ env.RELEASE_TAG }}"
+          body: |
+            ## 이번 달 업데이트
+            - 채용공고 자동 수집 완료
+            - 기업 DB 업데이트
+            
+            ## 다운로드
+            아래 첨부 파일에서 이번 달 교육 자료를 다운로드하세요.
+          files: ${{ env.RELEASE_FILE }}
+          generate_release_notes: true
