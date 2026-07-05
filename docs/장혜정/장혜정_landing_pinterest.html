@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>장혜정 · UX/UI Designer — Portfolio</title>
+
+<meta property="og:title" content="장혜정 · UX/UI Designer — Logical Design Architect">
+<meta property="og:description" content="데이터 정합성 기반 UX/UI 디자이너. 피그마 시스템 설계 · 국가공인 4종 · 실무 경력 3년">
+<meta property="og:type" content="website">
+<meta name="description" content="장혜정 UX/UI 디자이너 포트폴리오 — 데이터 정합성 기반 설계">
+
+<!-- Pin Sans 대체: Inter (closest open-source substitute per DESIGN_P.md) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DESIGN TOKENS — Pinterest Design System (DESIGN_P.md)
+   Font: Inter substituting Pin Sans per system spec
+   Negative tracking -1.2px applied at display sizes
+   ============================================================ */
+:root {
+  --primary:          #e60023;
+  --primary-pressed:  #cc001f;
+  --on-primary:       #ffffff;
+  --ink:              #000000;
+  --ink-soft:         #211922;
+  --body:             #33332e;
+  --charcoal:         #262622;
+  --mute:             #62625b;
+  --ash:              #91918c;
+  --stone:            #c8c8c1;
+  --hairline:         #dadad3;
+  --hairline-soft:    #e5e5e0;
+  --on-secondary:     #000000;
+  --secondary-bg:     #e5e5e0;
+  --secondary-pressed:#c8c8c1;
+  --canvas:           #ffffff;
+  --surface-soft:     #fbfbf9;
+  --surface-card:     #f6f6f3;
+  --surface-elevated: #ffffff;
+  --on-dark:          #ffffff;
+  --on-dark-mute:     rgba(255,255,255,0.7);
+  --surface-dark:     #262622;
+  --focus-outer:      #435ee5;
+  --focus-inner:      #ffffff;
+
+  --r-none: 0px;
+  --r-sm:   8px;
+  --r-md:   16px;
+  --r-lg:   32px;
+  --r-full: 9999px;
+
+  --sp-xxs: 4px; --sp-xs: 6px; --sp-sm: 8px; --sp-md: 12px;
+  --sp-lg: 16px; --sp-xl: 24px; --sp-xxl: 32px; --sp-section: 64px;
+
+  --font: 'Inter', -apple-system, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--surface-soft);
+  color: var(--body);
+  font-size: 16px;
+  line-height: 1.4;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+@media (min-width: 1024px) { .wrap { padding: 0 48px; } }
+
+/* ── Typography ─────────────────────────────────────────────── */
+.t-display-xl { font-size: 70px; font-weight: 600; line-height: 1.1; letter-spacing: -1.2px; }
+.t-display-lg { font-size: 44px; font-weight: 700; line-height: 1.15; letter-spacing: -0.8px; }
+.t-heading-xl  { font-size: 28px; font-weight: 700; line-height: 1.2;  letter-spacing: -1.2px; }
+.t-heading-lg  { font-size: 22px; font-weight: 600; line-height: 1.25; }
+.t-heading-md  { font-size: 18px; font-weight: 600; line-height: 1.3;  }
+.t-body-md     { font-size: 16px; font-weight: 400; line-height: 1.4;  }
+.t-body-strong { font-size: 16px; font-weight: 600; line-height: 1.4;  }
+.t-body-sm     { font-size: 14px; font-weight: 400; line-height: 1.4;  color: var(--mute); }
+.t-caption     { font-size: 12px; font-weight: 500; line-height: 1.5;  color: var(--mute); }
+
+@media (max-width: 768px) {
+  .t-display-xl { font-size: 44px; }
+  .t-display-lg { font-size: 32px; }
+}
+@media (max-width: 480px) {
+  .t-display-xl { font-size: 36px; }
+  .t-heading-xl { font-size: 22px; }
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 40px; padding: 6px 14px;
+  font-family: var(--font); font-size: 14px; font-weight: 700; line-height: 1;
+  border: none; cursor: pointer; white-space: nowrap;
+  border-radius: var(--r-md);
+  transition: background-color .12s ease;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { background: var(--primary-pressed); }
+.btn-secondary { background: var(--secondary-bg); color: var(--on-secondary); }
+.btn-secondary:hover { background: var(--secondary-pressed); }
+.btn-pill { border-radius: var(--r-full); }
+.btn-sm { height: 36px; padding: 6px 12px; font-size: 12px; }
+.btn-disabled {
+  background: var(--surface-card); color: var(--ash);
+  pointer-events: none; cursor: not-allowed;
+}
+
+/* ── Primary Nav ─────────────────────────────────────────────── */
+.primary-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--canvas);
+  height: 64px; display: flex; align-items: center;
+  border-bottom: 1px solid var(--hairline);
+}
+.primary-nav .wrap {
+  display: flex; align-items: center;
+  justify-content: space-between; width: 100%; gap: 16px;
+}
+.nav-logo {
+  font-weight: 700; font-size: 18px; color: var(--primary);
+  letter-spacing: -0.5px; white-space: nowrap; flex-shrink: 0;
+}
+.nav-search {
+  flex: 1; max-width: 480px;
+  background: var(--surface-card);
+  border: none; border-radius: var(--r-full);
+  height: 48px; padding: 0 16px;
+  font-family: var(--font); font-size: 16px; color: var(--ink);
+  outline: none;
+}
+.nav-search::placeholder { color: var(--ash); }
+.nav-links {
+  display: flex; align-items: center; gap: 20px;
+  font-size: 14px; font-weight: 600; color: var(--ink);
+  flex-shrink: 0;
+}
+.nav-links a { opacity: .75; transition: opacity .12s; }
+.nav-links a:hover { opacity: 1; }
+.nav-hamburger {
+  display: none; background: none; border: none; cursor: pointer;
+  flex-direction: column; gap: 5px; padding: 4px; flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block; width: 20px; height: 2px;
+  background: var(--ink); border-radius: 2px; transition: all .2s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-mobile-menu {
+  display: none; position: fixed; top: 64px; left: 0; right: 0;
+  background: var(--canvas); border-top: 1px solid var(--hairline);
+  padding: 16px 24px; z-index: 99; flex-direction: column; gap: 4px;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a {
+  padding: 10px 0; font-size: 16px; font-weight: 600;
+  border-bottom: 1px solid var(--hairline-soft); color: var(--ink);
+}
+.nav-mobile-menu a:last-child { border: none; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-search { display: none; }
+  .nav-hamburger { display: flex; }
+}
+
+/* ── Hero ──────────────────────────────────────────────────────── */
+.hero {
+  background: var(--surface-soft);
+  padding: 80px 0 var(--sp-section);
+}
+.hero-inner {
+  display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center;
+}
+.hero-eyebrow {
+  font-size: 14px; font-weight: 700; color: var(--primary);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;
+}
+.hero-headline { color: var(--ink); margin-bottom: 20px; }
+.hero-sub { color: var(--body); font-size: 18px; line-height: 1.5; margin-bottom: 32px; max-width: 520px; }
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-pin-stack {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+.hero-pin {
+  border-radius: var(--r-md); overflow: hidden;
+  background: var(--surface-card);
+}
+.hero-pin:first-child { grid-row: span 2; }
+.hero-pin-inner {
+  width: 100%; padding-bottom: 133%;
+  position: relative; overflow: hidden;
+  background: var(--surface-card);
+}
+.hero-pin:first-child .hero-pin-inner { padding-bottom: 100%; }
+.hero-pin:nth-child(2) .hero-pin-inner { padding-bottom: 100%; }
+.hero-pin:nth-child(3) .hero-pin-inner { padding-bottom: 100%; }
+.hero-pin-label {
+  position: absolute; bottom: 10px; left: 10px;
+  background: var(--canvas); color: var(--ink);
+  font-size: 12px; font-weight: 700;
+  padding: 6px 12px; border-radius: var(--r-full);
+}
+/* pin color fills */
+.pin-c1 { background: linear-gradient(135deg, #dbe4f0 0%, #b8cceb 100%); }
+.pin-c2 { background: linear-gradient(135deg, #fde8d0 0%, #f9c8a0 100%); }
+.pin-c3 { background: linear-gradient(135deg, #d9f0e0 0%, #a8ddb8 100%); }
+.pin-c4 { background: linear-gradient(135deg, #ede0f5 0%, #d0b0e8 100%); }
+
+@media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; } .hero-pin-stack { display: none; } }
+
+/* ── Section rhythm ────────────────────────────────────────────── */
+.section { padding: var(--sp-section) 0; }
+.section-eyebrow {
+  font-size: 12px; font-weight: 700; color: var(--primary);
+  text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px;
+}
+.section-head { margin-bottom: var(--sp-xxl); }
+.section-head p { margin-top: 10px; color: var(--mute); font-size: 16px; }
+
+/* ── Pin Grid (masonry-feel 3-col) ──────────────────────────────── */
+.pin-grid {
+  columns: 3; column-gap: 8px;
+}
+.pin-grid .pin-item {
+  break-inside: avoid; margin-bottom: 8px;
+  border-radius: var(--r-md); overflow: hidden;
+  background: var(--surface-card); position: relative;
+}
+.pin-item-img {
+  width: 100%; display: block;
+}
+.pin-item-body {
+  padding: 12px 14px 14px;
+}
+.pin-item-body h3 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.pin-item-body p  { font-size: 13px; color: var(--mute); line-height: 1.4; }
+.pin-pill {
+  position: absolute; top: 10px; left: 10px;
+  background: var(--canvas); color: var(--ink);
+  font-size: 11px; font-weight: 700;
+  padding: 4px 10px; border-radius: var(--r-full);
+}
+/* pin placeholder heights */
+.ph { width: 100%; background: var(--surface-card); border-radius: 0; }
+.ph-tall  { padding-bottom: 133%; }
+.ph-sq    { padding-bottom: 100%; }
+.ph-port  { padding-bottom: 125%; }
+.ph-short { padding-bottom: 80%;  }
+
+@media (max-width: 768px) { .pin-grid { columns: 2; } }
+@media (max-width: 480px) { .pin-grid { columns: 1; } }
+
+/* ── Feature row (alternating) ──────────────────────────────────── */
+.feature-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;
+  margin-bottom: 24px;
+}
+.feature-row.reverse { direction: rtl; }
+.feature-row.reverse > * { direction: ltr; }
+.feature-card {
+  background: var(--canvas); border-radius: var(--r-md); padding: 32px;
+}
+.feature-card h3 { color: var(--ink); margin-bottom: 12px; }
+.feature-card p  { color: var(--body); font-size: 16px; line-height: 1.5; margin-bottom: 20px; }
+.feature-card ul { display: flex; flex-direction: column; gap: 8px; }
+.feature-card li {
+  font-size: 15px; color: var(--body); padding-left: 14px; position: relative;
+}
+.feature-card li::before {
+  content: "→"; position: absolute; left: 0; color: var(--primary); font-size: 12px; top: 1px;
+}
+.feature-img {
+  border-radius: var(--r-lg); overflow: hidden;
+  aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .feature-row { grid-template-columns: 1fr; }
+  .feature-row.reverse { direction: ltr; }
+}
+
+/* ── Category tiles (skills) ────────────────────────────────────── */
+.category-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+}
+.category-tile {
+  background: var(--surface-card); border-radius: var(--r-md); padding: 16px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.cat-icon { font-size: 24px; }
+.cat-label { font-size: 16px; font-weight: 600; color: var(--ink); }
+.cat-items { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.filter-chip {
+  background: var(--canvas); color: var(--ink);
+  font-size: 12px; font-weight: 700; padding: 6px 12px;
+  border-radius: var(--r-full); border: 1px solid var(--hairline);
+}
+.filter-chip.active { background: var(--ink); color: var(--on-dark); border-color: var(--ink); }
+
+@media (max-width: 768px) { .category-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .category-grid { grid-template-columns: 1fr; } }
+
+/* ── Credential cards (dark) ────────────────────────────────────── */
+.cred-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+}
+.cred-card {
+  background: var(--surface-dark); color: var(--on-dark);
+  border-radius: var(--r-md); padding: 20px;
+}
+.cred-badge {
+  display: inline-flex; align-items: center; height: 22px; padding: 0 10px;
+  background: var(--primary); color: var(--on-primary);
+  border-radius: var(--r-full); font-size: 11px; font-weight: 700;
+  margin-bottom: 10px;
+}
+.cred-card h4 { font-size: 15px; font-weight: 700; color: var(--on-dark); margin-bottom: 4px; }
+.cred-card .issuer { font-size: 12px; color: var(--on-dark-mute); margin-bottom: 8px; }
+.cred-card p { font-size: 13px; color: var(--on-dark-mute); line-height: 1.4; }
+
+@media (max-width: 900px)  { .cred-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px)  { .cred-grid { grid-template-columns: 1fr; } }
+
+/* ── Timeline (experience) ──────────────────────────────────────── */
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.timeline-item {
+  display: grid; grid-template-columns: 160px 1fr;
+  gap: 24px; padding: 24px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.timeline-item:first-child { padding-top: 0; }
+.t-period { font-size: 13px; font-weight: 600; color: var(--ash); padding-top: 3px; }
+.t-org { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.t-role { font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+.t-list { display: flex; flex-direction: column; gap: 6px; }
+.t-list li { font-size: 14px; color: var(--body); padding-left: 12px; position: relative; }
+.t-list li::before { content: "—"; position: absolute; left: 0; color: var(--stone); }
+
+@media (max-width: 640px) { .timeline-item { grid-template-columns: 1fr; gap: 8px; } }
+
+/* ── Collab cards ───────────────────────────────────────────────── */
+.collab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.collab-card {
+  background: var(--surface-card); border-radius: var(--r-md); padding: 24px;
+}
+.collab-num {
+  font-size: 32px; font-weight: 700; color: var(--primary);
+  line-height: 1; margin-bottom: 12px;
+}
+.collab-card h3 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.collab-card p { font-size: 14px; color: var(--body); line-height: 1.5; }
+
+@media (max-width: 768px) { .collab-grid { grid-template-columns: 1fr; } }
+
+/* ── Dark CTA strip ─────────────────────────────────────────────── */
+.cta-strip {
+  background: var(--surface-dark); color: var(--on-dark);
+  padding: 48px 0;
+}
+.cta-strip-inner {
+  display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap;
+}
+.cta-strip h2 { color: var(--on-dark); }
+.cta-strip p { color: var(--on-dark-mute); margin-top: 8px; font-size: 16px; }
+
+/* ── Footer ─────────────────────────────────────────────────────── */
+.footer {
+  background: var(--canvas);
+  border-top: 1px solid var(--hairline);
+  padding: 32px 0;
+}
+.footer-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  margin-bottom: 32px;
+}
+.footer-col h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.footer-col ul { display: flex; flex-direction: column; gap: 8px; }
+.footer-col li a { font-size: 14px; color: var(--mute); }
+.footer-col li a:hover { color: var(--ink); }
+.footer-bottom {
+  padding-top: 20px; border-top: 1px solid var(--hairline);
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+}
+.footer-wordmark { font-weight: 700; font-size: 16px; color: var(--primary); }
+
+@media (max-width: 768px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+/* ── Reveal ──────────────────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .45s ease, transform .45s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+:focus-visible { outline: 2px solid var(--focus-outer); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ── PRIMARY NAV ─────────────────────────────────────────── -->
+<nav class="primary-nav">
+  <div class="wrap">
+    <span class="nav-logo">JHJ</span>
+    <input class="nav-search" type="text" placeholder="포트폴리오, 작업물 검색...">
+    <div class="nav-links">
+      <a href="#about">소개</a>
+      <a href="#work">작업물</a>
+      <a href="#credentials">자격</a>
+      <a href="#experience">경력</a>
+      <a href="#contact">연락</a>
+      <a class="btn btn-primary btn-sm" href="#contact">연락하기</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="#about"       onclick="closeMobileMenu()">소개</a>
+  <a href="#work"        onclick="closeMobileMenu()">작업물</a>
+  <a href="#credentials" onclick="closeMobileMenu()">자격</a>
+  <a href="#experience"  onclick="closeMobileMenu()">경력</a>
+  <a href="#contact"     onclick="closeMobileMenu()">연락하기</a>
+</div>
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<header class="hero" id="about">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">UX/UI Designer · Design System Coordinator</div>
+        <h1 class="t-display-xl hero-headline">장혜정<br>Logical Design<br>Architect</h1>
+        <p class="hero-sub">
+          세무회계 전공의 정밀한 데이터 정합성과 철저한 워크플로우 매뉴얼 설계 능력을 바탕으로,
+          개발자와 AI가 즉시 해석 가능한 디지털 인터페이스를 설계합니다.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-pill" href="#contact">채용 담당자에게</a>
+          <a class="btn btn-secondary btn-pill" href="#experience">경력 보기</a>
+        </div>
+      </div>
+
+      <!-- 핀 스택 — 포트폴리오 미리보기 -->
+      <div class="hero-pin-stack">
+        <div class="hero-pin">
+          <div class="hero-pin-inner pin-c1">
+            <span class="hero-pin-label">UX/UI Design</span>
+          </div>
+        </div>
+        <div class="hero-pin">
+          <div class="hero-pin-inner pin-c2">
+            <span class="hero-pin-label">Figma System</span>
+          </div>
+        </div>
+        <div class="hero-pin">
+          <div class="hero-pin-inner pin-c3">
+            <span class="hero-pin-label">Brand Asset</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── WORK PIN GRID ──────────────────────────────────────────── -->
+<section class="section" id="work" style="background: var(--canvas);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Work · Portfolio</div>
+      <h2 class="t-heading-xl">주요 작업물</h2>
+      <p>UX/UI 설계, 브랜드 에셋 제작, 워크플로우 시스템 구축 경험</p>
+    </div>
+
+    <div class="pin-grid">
+      <!-- 핀 1 -->
+      <div class="pin-item reveal">
+        <div class="ph ph-tall pin-c1">
+          <span class="pin-pill">Jaber · 2024</span>
+        </div>
+        <div class="pin-item-body">
+          <h3>다국어 글로벌 웹 플랫폼 UX</h3>
+          <p>언어별 문자열 길이에 대응하는 반응형 프레임 아키텍처 설계</p>
+        </div>
+      </div>
+      <!-- 핀 2 -->
+      <div class="pin-item reveal">
+        <div class="ph ph-port pin-c2">
+          <span class="pin-pill">Design System</span>
+        </div>
+        <div class="pin-item-body">
+          <h3>피그마 컴포넌트 시스템</h3>
+          <p>Auto Layout · Variables 기반 개발 핸드오프 가이드</p>
+        </div>
+      </div>
+      <!-- 핀 3 -->
+      <div class="pin-item reveal">
+        <div class="ph ph-sq pin-c3">
+          <span class="pin-pill">Brand Asset</span>
+        </div>
+        <div class="pin-item-body">
+          <h3>브랜드 에셋 규격화</h3>
+          <p>인스타그램 카드뉴스 · 서비스 카드 UI 통일 시스템</p>
+        </div>
+      </div>
+      <!-- 핀 4 -->
+      <div class="pin-item reveal">
+        <div class="ph ph-tall pin-c4">
+          <span class="pin-pill">E-Commerce</span>
+        </div>
+        <div class="pin-item-body">
+          <h3>상세페이지 전환율 최적화</h3>
+          <p>스크롤 반응률·매출 전환율을 정량화한 레이아웃 기획</p>
+        </div>
+      </div>
+      <!-- 핀 5 -->
+      <div class="pin-item reveal">
+        <div class="ph ph-port pin-c1">
+          <span class="pin-pill">Editorial</span>
+        </div>
+        <div class="pin-item-body">
+          <h3>패션·주얼리 이미지 리터칭</h3>
+          <p>300 DPI 규격 준수 픽셀 레벨 정밀 보정</p>
+        </div>
+      </div>
+      <!-- 핀 6 -->
+      <div class="pin-item reveal">
+        <div class="ph ph-sq pin-c2">
+          <span class="pin-pill">Workflow</span>
+        </div>
+        <div class="pin-item-body">
+          <h3>업무 매뉴얼 시스템 설계</h3>
+          <p>Notion 히스토리 테이블로 결정사항 아카이빙</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STRENGTHS (Feature Row) ───────────────────────────────────── -->
+<section class="section" style="background: var(--surface-soft);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Career Target · Positioning</div>
+      <h2 class="t-heading-xl">핵심 강점 3가지</h2>
+    </div>
+
+    <!-- Feature row 1 -->
+    <div class="feature-row reveal" style="margin-bottom: 16px;">
+      <div class="feature-card">
+        <h3 class="t-heading-md">데이터 정합성 검증</h3>
+        <p>세무회계 전공 기반으로 정보를 구조화하고, 오류 없는 논리 흐름으로 설계 근거를 인식합니다.</p>
+        <ul>
+          <li>대차대조표 원리 기반 데이터 오류 점검</li>
+          <li>AT(FAT 1급) · 전산회계 2급 보유</li>
+          <li>수치 기반 인과 분석으로 설계 의사결정 뒷받침</li>
+        </ul>
+      </div>
+      <div class="feature-img pin-c1">
+        <span style="font-size: 48px;">📊</span>
+      </div>
+    </div>
+
+    <!-- Feature row 2 (reverse) -->
+    <div class="feature-row reverse reveal" style="margin-bottom: 16px;">
+      <div class="feature-card">
+        <h3 class="t-heading-md">기계 가독성 높은 UI 설계</h3>
+        <p>피그마 오토 레이아웃과 변수(Variables)를 기반으로 개발자가 즉시 해석 가능한 컴포넌트를 설계합니다.</p>
+        <ul>
+          <li>Figma Advanced — 디자인 토큰 기반 스케일 가이드</li>
+          <li>Multi-Device QA — 크로스 브라우징 정합성 스크리닝</li>
+          <li>GTQ 1급 · GTQi 1급 보유</li>
+        </ul>
+      </div>
+      <div class="feature-img pin-c2">
+        <span style="font-size: 48px;">🖥️</span>
+      </div>
+    </div>
+
+    <!-- Feature row 3 -->
+    <div class="feature-row reveal">
+      <div class="feature-card">
+        <h3 class="t-heading-md">멀티 에이전트 워크플로우</h3>
+        <p>업무 스케줄과 가이드라인을 매뉴얼화하여 사람과 AI 에이전트가 동시에 참조 가능한 프로세스를 구축합니다.</p>
+        <ul>
+          <li>Notion · Jira 히스토리 테이블 매뉴얼화</li>
+          <li>AI 에이전트 브랜드 가이드라인 템플릿 설계</li>
+          <li>기획·개발·AI가 공유할 수 있는 프로세스 문서화</li>
+        </ul>
+      </div>
+      <div class="feature-img pin-c3">
+        <span style="font-size: 48px;">⚙️</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS (Category Tiles) ──────────────────────────────────── -->
+<section class="section" style="background: var(--canvas);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Tech & Methodology</div>
+      <h2 class="t-heading-xl">기술 스택</h2>
+    </div>
+
+    <div class="category-grid">
+      <div class="category-tile reveal">
+        <div class="cat-icon">🎨</div>
+        <div class="cat-label">UX/UI Design</div>
+        <div class="cat-items">
+          <span class="filter-chip active">Figma</span>
+          <span class="filter-chip">Auto Layout</span>
+          <span class="filter-chip">Variables</span>
+          <span class="filter-chip">Component</span>
+          <span class="filter-chip">Prototype</span>
+        </div>
+      </div>
+      <div class="category-tile reveal">
+        <div class="cat-icon">🖼️</div>
+        <div class="cat-label">Editorial & Brand</div>
+        <div class="cat-items">
+          <span class="filter-chip active">Photoshop</span>
+          <span class="filter-chip active">Illustrator</span>
+          <span class="filter-chip">300DPI</span>
+          <span class="filter-chip">Color Mgmt</span>
+          <span class="filter-chip">Vector</span>
+        </div>
+      </div>
+      <div class="category-tile reveal">
+        <div class="cat-icon">📈</div>
+        <div class="cat-label">Business Intel</div>
+        <div class="cat-items">
+          <span class="filter-chip active">세무회계</span>
+          <span class="filter-chip active">재무회계</span>
+          <span class="filter-chip">CTR/ROAS</span>
+          <span class="filter-chip">데이터 분석</span>
+          <span class="filter-chip">ROI 관점</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CREDENTIALS ──────────────────────────────────────────────── -->
+<section class="section" style="background: var(--surface-soft);" id="credentials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Recognized Credentials</div>
+      <h2 class="t-heading-xl">국가 공인 자격 4종</h2>
+    </div>
+
+    <div class="cred-grid">
+      <div class="cred-card reveal">
+        <div class="cred-badge">2025.07</div>
+        <h4>AT (FAT 1급)</h4>
+        <div class="issuer">한국공인회계사회</div>
+        <p>ERP 정보 구조화 논리 및 재무 비용 구조 해독 능력</p>
+      </div>
+      <div class="cred-card reveal">
+        <div class="cred-badge">2025.02</div>
+        <h4>전산회계 2급 (국가공인)</h4>
+        <div class="issuer">한국세무사회</div>
+        <p>수치 기반 인과 분석력 및 데이터 정합성 검증 능력</p>
+      </div>
+      <div class="cred-card reveal">
+        <div class="cred-badge">2023.10</div>
+        <h4>GTQi (일러스트) 1급</h4>
+        <div class="issuer">한국생산성본부</div>
+        <p>벡터 그래픽 가공 및 인터페이스 아이콘 컴포넌트 설계</p>
+      </div>
+      <div class="cred-card reveal">
+        <div class="cred-badge">2023.09</div>
+        <h4>GTQ (그래픽기술) 1급</h4>
+        <div class="issuer">한국생산성본부</div>
+        <p>픽셀 보정, 고해상도 리터칭 및 미디어 최적화 출력</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ───────────────────────────────────────────────── -->
+<section class="section" style="background: var(--canvas);" id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Work Experience</div>
+      <h2 class="t-heading-xl">실무 경력 3년</h2>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="t-period">2023.10 — 2024.12<br>1년 3개월</div>
+        <div>
+          <div class="t-org">자버 (Jaber) 디자인팀</div>
+          <div class="t-role">UX/UI 디자인 인턴 · 어시스트 주임</div>
+          <ul class="t-list">
+            <li>다국어 글로벌 웹 플랫폼 — 언어별 문자열 길이에 대응하는 반응형 프레임 아키텍처</li>
+            <li>이기종 디바이스 크로스 QA — Slack·Notion 이슈 추적 테이블로 개발팀 소통 단축</li>
+            <li>전사 비즈니스 에셋 규격화 — 인스타그램 카드뉴스, 서비스 카드 UI 설계</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-period">2021.04 — 2022.08<br>1년 5개월</div>
+        <div>
+          <div class="t-org">스튜디오공실 (Studio 05)</div>
+          <div class="t-role">디자인팀 주임</div>
+          <ul class="t-list">
+            <li>패션·주얼리 촬영 기획 및 이미지 에셋화</li>
+            <li>무역 사이트 상품 이미지 리터칭 — 300 DPI 규격 픽셀 레벨 정밀 보정</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-period">Freelance</div>
+        <div>
+          <div class="t-org">프리랜서 크리에이티브</div>
+          <div class="t-role">디자인 & 콘텐츠 기획</div>
+          <ul class="t-list">
+            <li>엑스컴(X-com) 상세페이지 — 전환율을 정량화한 레이아웃 기획</li>
+            <li>비근마켓 카드뉴스 — 인포그래픽화 에셋 제작 및 최종 인쇄</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-period">2022.12 — 2023.03<br>4개월</div>
+        <div>
+          <div class="t-org">H&M (스반디시 리스크 어소스 부문)</div>
+          <div class="t-role">의류판매 SA (Store Advisor)</div>
+          <ul class="t-list">
+            <li>긴급 대응 워크플로우 매뉴얼 설계 — 인수인계 시간 단축, 우수 사례 표창</li>
+            <li>재고 관리 · 결제 시스템 실시간 트래킹, VIP 예약 모니터링</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW TO WORK WITH ME ──────────────────────────────────────── -->
+<section class="section" style="background: var(--surface-soft);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">How to Work With Me</div>
+      <h2 class="t-heading-xl">협업을 위한 3가지 원칙</h2>
+    </div>
+    <div class="collab-grid">
+      <div class="collab-card reveal">
+        <div class="collab-num">01</div>
+        <h3>가이드라인 중심 협업</h3>
+        <p>타이포그래피 스펙과 오토 레이아웃 마진까지 지켜, 개발 인계 단계에서 1픽셀의 불일치도 남기지 않습니다.</p>
+      </div>
+      <div class="collab-card reveal">
+        <div class="collab-num">02</div>
+        <h3>프로세스 아카이빙</h3>
+        <p>모든 피드백과 결정 사항을 히스토리 테이블로 매뉴얼화해, 팀 누구나 병목을 스스로 해결할 수 있게 합니다.</p>
+      </div>
+      <div class="collab-card reveal">
+        <div class="collab-num">03</div>
+        <h3>데이터 지향 개선</h3>
+        <p>마케팅 효율 예측과 분석 지표를 근거로 정량적으로 설득력 있는 디자인을 제안합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DARK CTA STRIP ───────────────────────────────────────────── -->
+<div class="cta-strip">
+  <div class="wrap">
+    <div class="cta-strip-inner">
+      <div>
+        <h2 class="t-display-lg">함께 일할 준비가<br>되어 있습니다</h2>
+        <p>데이터 정합성 기반 UX/UI 디자이너 · 실무 경력 3년 · 국가공인 4종</p>
+      </div>
+      <a class="btn btn-primary btn-pill" href="#contact" style="height: 48px; padding: 12px 28px; font-size: 16px;">
+        연락하기
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER / CONTACT ─────────────────────────────────────────── -->
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:wkdgpwjd98@naver.com">✉ wkdgpwjd98@naver.com</a></li>
+          <li><a href="#">☎ 010-9881-1313</a></li>
+          <li><span style="color: var(--mute); font-size:14px;">📍 경기 고양시 일산동구</span></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>포트폴리오</h4>
+        <ul>
+          <li><a href="#">PDF 다운로드 (준비중)</a></li>
+          <li><a href="#work">작업물 보기</a></li>
+          <li><a href="#credentials">자격 확인</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>희망 조건</h4>
+        <ul>
+          <li><span style="color: var(--mute); font-size:14px;">연봉 2,800 ~ 3,000만 원</span></li>
+          <li><span style="color: var(--mute); font-size:14px;">UX/UI · 디자인 시스템</span></li>
+          <li><span style="color: var(--mute); font-size:14px;">정규직 희망</span></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>학력</h4>
+        <ul>
+          <li><span style="color: var(--mute); font-size:14px;">서일대학교 세무회계학과</span></li>
+          <li><span style="color: var(--mute); font-size:14px;">2017 ~ 2019 졸업</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-wordmark">JHJ Portfolio</span>
+      <span class="t-caption">© 2026 Jang Hye Jung · Logical Design Architect · Seoul, Korea</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobileMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+</script>
+</body>
+</html>
