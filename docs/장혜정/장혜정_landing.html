@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JANG HYE JUNG · Logical Design Architect</title>
+
+<!-- OG 태그 (소셜 공유용) -->
+<meta property="og:title" content="JANG HYE JUNG · Logical Design Architect">
+<meta property="og:description" content="데이터 정합성 기반 UX/UI 디자이너 · 피그마 시스템 설계 · 국가공인 자격 5종">
+<meta property="og:type" content="website">
+<meta name="description" content="데이터 정합성 기반 UX/UI 디자이너 장혜정 포트폴리오">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap');
+
+  :root{
+    --primary:#0070d1;
+    --primary-pressed:#0064b7;
+    --primary-active:#004d8d;
+    --on-primary:#ffffff;
+    --link-light:#0064b7;
+    --link-dark:#53b1ff;
+    --ink:#000000;
+    --ink-elevated:#181818;
+    --canvas-dark:#000000;
+    --canvas-light:#ffffff;
+    --surface-card:#f5f7fa;
+    --surface-dark-card:#181818;
+    --surface-dark-elevated:#121314;
+    --body-light:rgba(0,0,0,0.6);
+    --mute-light:#6b6b6b;
+    --body-dark:rgba(255,255,255,0.7);
+    --mute-dark:rgba(229,229,229,0.55);
+    --ash-dark:rgba(229,229,229,0.2);
+    --hairline-light:#f3f3f3;
+    --hairline-dark:rgba(229,229,229,0.2);
+    --on-dark:#ffffff;
+    --on-dark-mute:#cccccc;
+
+    --r-sm:4px; --r-md:8px; --r-full:9999px;
+    --sp-xxs:4px; --sp-xs:8px; --sp-sm:12px; --sp-md:16px;
+    --sp-lg:24px; --sp-xl:32px; --sp-xxl:48px; --sp-section:96px;
+    --font: 'Sora', sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:var(--canvas-light);
+    font-size:18px; line-height:1.5; letter-spacing:0.1px;
+    font-weight:400;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 48px;}
+  @media (max-width:768px){ .wrap{padding:0 24px;} }
+  @media (max-width:480px){ .wrap{padding:0 24px;} }
+
+  /* ---------- Type scale ---------- */
+  .t-display-xl{font-weight:300; font-size:54px; line-height:1.25; letter-spacing:-0.1px;}
+  .t-display-lg{font-weight:300; font-size:44px; line-height:1.25; letter-spacing:0.1px;}
+  .t-display-md{font-weight:300; font-size:35px; line-height:1.25;}
+  .t-heading-xl{font-weight:300; font-size:28px; line-height:1.25; letter-spacing:0.1px;}
+  .t-heading-lg{font-weight:300; font-size:22px; line-height:1.25;}
+  .t-heading-md{font-weight:600; font-size:18px; line-height:1.3;}
+  .t-body-strong{font-weight:500; font-size:18px; letter-spacing:0.4px;}
+  .t-body-sm{font-weight:400; font-size:16px;}
+  .t-caption-md{font-weight:400; font-size:14px;}
+  .t-caption-sm{font-weight:500; font-size:12px; letter-spacing:0.02em;}
+  @media (max-width:768px){
+    .t-display-xl{font-size:44px;} .t-display-lg{font-size:32px;} .t-display-md{font-size:28px;}
+  }
+  @media (max-width:480px){
+    .t-display-xl{font-size:32px;} .t-heading-xl{font-size:24px;}
+  }
+
+  /* ---------- Nav ---------- */
+  .primary-nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--canvas-dark); color:var(--on-dark);
+    height:64px; display:flex; align-items:center;
+  }
+  .primary-nav .wrap{display:flex; align-items:center; justify-content:space-between; width:100%;}
+  .nav-mark{font-weight:700; font-size:16px; letter-spacing:0.05em;}
+  .nav-links{display:flex; gap:28px; font-weight:500; font-size:15px;}
+  .nav-links a{opacity:.85; transition:opacity .15s;}
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{display:flex; align-items:center; gap:14px;}
+
+  /* 모바일 햄버거 버튼 */
+  .nav-hamburger{
+    display:none; background:none; border:none; cursor:pointer;
+    flex-direction:column; gap:5px; padding:4px;
+  }
+  .nav-hamburger span{display:block; width:22px; height:2px; background:var(--on-dark); border-radius:2px; transition:all .2s;}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-hamburger.open span:nth-child(2){opacity:0;}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* 모바일 드롭다운 메뉴 */
+  .nav-mobile-menu{
+    display:none; position:fixed; top:64px; left:0; right:0;
+    background:var(--canvas-dark); border-top:1px solid var(--ash-dark);
+    padding:16px 24px; z-index:49; flex-direction:column; gap:12px;
+  }
+  .nav-mobile-menu.open{display:flex;}
+  .nav-mobile-menu a{color:var(--on-dark); font-size:16px; font-weight:500; opacity:.85; padding:8px 0; border-bottom:1px solid var(--ash-dark);}
+  .nav-mobile-menu a:last-child{border-bottom:none;}
+
+  @media (max-width:768px){
+    .nav-links{display:none;}
+    .nav-hamburger{display:flex;}
+    .nav-cta .btn{display:none;}
+  }
+
+  /* ---------- Buttons / pills ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    height:48px; padding:12px 28px; border-radius:var(--r-full);
+    font-weight:700; font-size:18px; letter-spacing:0.45px;
+    border:none; cursor:pointer; white-space:nowrap;
+    transition:background-color .15s ease;
+  }
+  .btn-primary{background:var(--primary); color:var(--on-primary);}
+  .btn-primary:hover, .btn-primary:active{background:var(--primary-pressed);}
+  .btn-secondary-dark{background:transparent; color:var(--on-dark); border:1px solid var(--ash-dark);}
+  .btn-secondary-dark:hover{border-color:var(--on-dark);}
+  .btn-secondary-light{background:transparent; color:var(--ink); border:1px solid #d8d8d8;}
+  .btn-secondary-light:hover{border-color:var(--ink);}
+  .btn-on-blue{background:var(--on-primary); color:var(--primary);}
+  .btn-on-blue:hover{background:#eef4fc;}
+  .btn-sm{height:40px; padding:9px 20px; font-size:14px; letter-spacing:0.324px;}
+  .btn-disabled{opacity:0.5; cursor:not-allowed; pointer-events:none;}
+
+  /* ---------- Bands ---------- */
+  .band{padding:var(--sp-section) 0;}
+  .band-dark{background:var(--canvas-dark); color:var(--on-dark);}
+  .band-light{background:var(--canvas-light); color:var(--ink);}
+  .band-blue{background:var(--primary); color:var(--on-primary);}
+  @media (max-width:768px){ .band{padding:64px 0;} }
+  @media (max-width:480px){ .band{padding:48px 0;} }
+
+  .eyebrow{
+    font-family:var(--font); font-weight:600; font-size:12px; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--primary); margin-bottom:var(--sp-md);
+  }
+  .band-dark .eyebrow{color:var(--link-dark);}
+  .band-blue .eyebrow{color:rgba(255,255,255,0.75);}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:120px 0 96px;}
+  .hero-role{margin-top:var(--sp-md); color:var(--on-dark-mute); font-size:20px; font-weight:300;}
+  .hero-tagline{margin-top:var(--sp-lg); max-width:640px; color:var(--body-dark); font-size:18px;}
+  .hero-actions{display:flex; gap:14px; margin-top:var(--sp-xl); flex-wrap:wrap;}
+
+  .spec-strip{
+    margin-top:64px; border-top:1px solid var(--hairline-dark);
+    padding-top:var(--sp-lg);
+    display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-lg);
+  }
+  .spec-item .spec-label{font-size:12px; letter-spacing:0.1em; color:var(--mute-dark); text-transform:uppercase; margin-bottom:6px;}
+  .spec-item .spec-value{font-size:16px; font-weight:500;}
+  @media (max-width:768px){ .spec-strip{grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- Section heads ---------- */
+  .section-head{margin-bottom:var(--sp-xxl); max-width:680px;}
+  .section-head h2{margin-top:var(--sp-xs);}
+  .section-head p{margin-top:var(--sp-md); color:var(--body-light); font-size:18px;}
+  .band-dark .section-head p{color:var(--body-dark);}
+
+  /* ---------- Cards ---------- */
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-lg);}
+  .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--sp-lg);}
+  @media (max-width:900px){ .grid-3{grid-template-columns:1fr;} .grid-2{grid-template-columns:1fr;} }
+
+  .feature-card{background:var(--canvas-light); border:1px solid var(--hairline-light); border-radius:var(--r-md); padding:var(--sp-xl); transition:transform .15s ease;}
+  .feature-card:hover{transform:translateY(-2px);}
+  .feature-card .idx{font-size:12px; color:var(--primary); font-weight:700; margin-bottom:var(--sp-md);}
+  .feature-card h3{margin-bottom:var(--sp-sm);}
+  .feature-card p{color:var(--body-light); font-size:16px;}
+
+  .product-card{background:var(--surface-card); border-radius:var(--r-md); padding:var(--sp-lg);}
+  .product-card h3{margin-bottom:var(--sp-md);}
+  .product-card ul{display:flex; flex-direction:column; gap:10px;}
+  .product-card li{font-size:15.5px; color:var(--body-light); padding-left:16px; position:relative;}
+  .product-card li::before{content:"→"; position:absolute; left:0; color:var(--primary);}
+
+  .product-card-dark{background:var(--surface-dark-card); border-radius:var(--r-md); padding:var(--sp-lg); color:var(--on-dark);}
+  .product-card-dark h3{margin-bottom:var(--sp-sm);}
+  .product-card-dark p{color:var(--body-dark); font-size:15.5px;}
+
+  /* ---------- Philosophy quote band ---------- */
+  .quote-band blockquote{max-width:760px; font-weight:300;}
+  .quote-band .more{margin-top:var(--sp-xl); max-width:720px; color:var(--body-dark); font-size:16px; display:none;}
+  .quote-band .more.open{display:block;}
+  .quote-toggle{
+    margin-top:var(--sp-lg); background:none; border:none; color:var(--link-dark);
+    font-family:var(--font); font-size:15px; font-weight:600; cursor:pointer;
+    display:flex; align-items:center; gap:6px;
+  }
+
+  /* ---------- Credentials ---------- */
+  .cred-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-md);}
+  @media (max-width:900px){ .cred-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .cred-grid{grid-template-columns:1fr;} }
+  .cred-card{background:var(--surface-dark-card); border-radius:var(--r-md); padding:var(--sp-lg); color:var(--on-dark);}
+  .badge{
+    display:inline-flex; align-items:center; height:24px; padding:0 10px;
+    background:var(--primary); color:var(--on-primary); border-radius:var(--r-full);
+    font-size:12px; font-weight:500; margin-bottom:var(--sp-md);
+  }
+  .cred-card h3{font-size:17px; margin-bottom:8px;}
+  .cred-card .issuer{font-size:13px; color:var(--mute-dark); margin-bottom:10px;}
+  .cred-card p{font-size:14.5px; color:var(--body-dark);}
+
+  /* ---------- Experience rows ---------- */
+  .exp-row{
+    display:grid; grid-template-columns:180px 1fr; gap:var(--sp-xl);
+    padding:var(--sp-xl) 0; border-bottom:1px solid var(--hairline-light);
+  }
+  .exp-row:first-child{padding-top:0;}
+  .exp-period{font-size:14px; color:var(--mute-light); font-weight:500;}
+  .exp-org{margin-bottom:4px;}
+  .exp-role{color:var(--primary); font-size:15px; font-weight:600; margin-bottom:var(--sp-sm);}
+  .exp-row ul{display:flex; flex-direction:column; gap:8px;}
+  .exp-row li{font-size:15.5px; color:var(--body-light); padding-left:16px; position:relative;}
+  .exp-row li::before{content:"—"; position:absolute; left:0; color:var(--mute-light);}
+  @media (max-width:640px){ .exp-row{grid-template-columns:1fr; gap:8px;} }
+
+  .edu-row{display:flex; justify-content:space-between; padding:var(--sp-md) 0; border-bottom:1px solid var(--hairline-light); flex-wrap:wrap; gap:8px;}
+  .edu-row:last-child{border-bottom:none;}
+  .edu-row .edu-name{font-weight:600;}
+  .edu-row .edu-period{color:var(--mute-light); font-size:14px;}
+  .edu-row .edu-desc{flex-basis:100%; color:var(--body-light); font-size:15px; margin-top:4px;}
+
+  /* ---------- Contact / footer blue band ---------- */
+  .contact-band{background:var(--primary); color:var(--on-primary);}
+  .contact-grid{display:flex; justify-content:space-between; align-items:flex-end; gap:var(--sp-xxl); flex-wrap:wrap;}
+  .contact-links{display:flex; flex-direction:column; gap:var(--sp-sm); margin-top:var(--sp-xl);}
+  .contact-links a, .contact-links span{font-size:16px; opacity:.92; display:flex; gap:10px; align-items:center;}
+  .foot-meta{
+    margin-top:var(--sp-xxl); padding-top:var(--sp-lg); border-top:1px solid rgba(255,255,255,0.2);
+    display:flex; justify-content:space-between; font-size:12.5px; color:rgba(255,255,255,0.65); flex-wrap:wrap; gap:8px;
+  }
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1; transform:none; transition:none;}
+    .feature-card:hover{transform:none;}
+  }
+
+  :focus-visible{outline:2px solid var(--primary); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="primary-nav">
+  <div class="wrap">
+    <span class="nav-mark">JHJ / LOGICAL DESIGN ARCHITECT</span>
+    <div class="nav-links">
+      <a href="#about">소개</a>
+      <a href="#skills">역량</a>
+      <a href="#credentials">자격</a>
+      <a href="#experience">경력</a>
+      <a href="#collab">협업방식</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-primary btn-sm" href="#contact">연락하기</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- 모바일 드롭다운 메뉴 -->
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobileMenu()">소개</a>
+  <a href="#skills" onclick="closeMobileMenu()">역량</a>
+  <a href="#credentials" onclick="closeMobileMenu()">자격</a>
+  <a href="#experience" onclick="closeMobileMenu()">경력</a>
+  <a href="#collab" onclick="closeMobileMenu()">협업방식</a>
+  <a href="#contact" onclick="closeMobileMenu()">연락하기</a>
+</div>
+
+<!-- HERO -->
+<header class="band band-dark hero">
+  <div class="wrap">
+    <div class="eyebrow">UX/UI Designer · Design System Coordinator</div>
+    <h1 class="t-display-xl">JANG HYE JUNG</h1>
+    <p class="hero-role">Logical Design Architect</p>
+    <p class="hero-tagline">
+      세무회계 전공의 정밀한 데이터 정합성과 철저한 워크플로우 매뉴얼 설계 능력을 바탕으로,
+      개발자와 AI가 즉시 해석 가능한 고품질 디지털 인터페이스를 아키텍처합니다.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#contact">채용 담당자에게</a>
+      <a class="btn btn-secondary-dark" href="#experience">경력 살펴보기</a>
+    </div>
+
+    <div class="spec-strip">
+      <div class="spec-item">
+        <div class="spec-label">Target Role</div>
+        <div class="spec-value">UX/UI · Design System</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-label">Core Tool</div>
+        <div class="spec-value">Figma Variables / Auto Layout</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-label">Track Record</div>
+        <div class="spec-value">실무 경력 3년</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-label">Licenses</div>
+        <div class="spec-value">국가공인 4종 보유</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- CAREER TARGET & KEY STRENGTHS -->
+<section class="band band-light" id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Career Target & Positioning</div>
+      <h2 class="t-heading-xl">데이터 정합성으로 증명하는 디자인</h2>
+      <p>세 가지 핵심 강점이 실무 결과물의 신뢰도를 뒷받침합니다.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="feature-card reveal">
+        <div class="idx">STRENGTH / 01</div>
+        <h3 class="t-heading-md">데이터 정합성 검증</h3>
+        <p>세무회계 전공 공부 기반으로 정보를 구조화하고, 오류 없는 논리 흐름으로 설계 근거를 인식합니다.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="idx">STRENGTH / 02</div>
+        <h3 class="t-heading-md">기계 가독성 높은 UI</h3>
+        <p>피그마 오토 레이아웃과 변수(Variables)를 기반으로, 개발자가 즉시 해석 가능한 컴포넌트를 설계합니다.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="idx">STRENGTH / 03</div>
+        <h3 class="t-heading-md">멀티 에이전트 워크플로우</h3>
+        <p>업무 스케줄과 가이드라인을 매뉴얼화하여, 사람과 AI 에이전트가 동시에 참조 가능한 프로세스를 만듭니다.</p>
+      </div>
+    </div>
+
+    <p class="t-body-strong reveal" style="margin-top:48px; max-width:640px;">
+      "최고의 디자인은 모호함을 걷어낸 완벽한 시스템과 논리적인 프로세스에서 출발합니다."
+    </p>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="band band-dark quote-band">
+  <div class="wrap">
+    <div class="eyebrow reveal">Philosophy — The Power of Archiving</div>
+    <blockquote class="t-display-md reveal">
+      "기록을 편집하는 리소스를 시스템으로 전환하는 가장 강력한 도구입니다."
+    </blockquote>
+
+    <button class="quote-toggle" id="quoteToggle">전체 이야기 읽기 <span id="toggleArrow">↓</span></button>
+    <div class="more" id="quoteMore">
+      <p style="margin-bottom:16px;">
+        어린 시절 일기장의 용도를 넘어 일정 기록과 일정 관리를 개별 자동화하면서, 데이터 분류와
+        정합성 검증의 가치를 처음 발견했습니다. 이 습관은 세무회계학 전공으로 이어져 대차대조표의
+        엄격한 좌우 대칭성을 이해하는 기반이 되었고, &Other Stories 재직 당시 매장의 반복 업무와
+        결제 오류 패턴을 매뉴얼 카드로 문서화해 실수율을 0에 가깝게 통제하는 성과로 이어졌습니다.
+      </p>
+      <p>
+        디지털 프로덕트 환경에서 단순히 아름다운 시각 산출물을 그려내는 공급자에 머물러서는 안 된다고
+        생각합니다. 피그마 컴포넌트에 기계 가독성을 부여해 개발자가 구조를 즉각 해석할 수 있도록 하고,
+        AI 에이전트가 브랜드 가이드라인에 맞춰 마케팅 산출물을 자율적으로 생산할 수 있는 프로세스
+        템플릿을 설계하는 것 — 기획, 개발, AI가 함께 호흡할 수 있는 가교가 되는 것이 목표입니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- TECH & METHODOLOGY -->
+<section class="band band-light" id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Tech & Methodology Matrix</div>
+      <h2 class="t-heading-xl">역량 매트릭스</h2>
+      <p>디자인, 브랜드 에셋 관리, 비즈니스 인텔리전스 세 축으로 구성됩니다.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="product-card reveal">
+        <h3 class="t-heading-md">UX/UI & System Architecture</h3>
+        <ul>
+          <li>Figma Advanced — 오토 레이아웃, 디자인 토큰 및 변수 기반 반응형 스케일 가이드</li>
+          <li>Machine-Readable Layout — Grid & Flexbox 친화적 프레임 워크 설계</li>
+          <li>Multi-Device QA — 웹/태블릿/모바일 크로스 브라우징 정합성 스크리닝</li>
+        </ul>
+      </div>
+      <div class="product-card reveal">
+        <h3 class="t-heading-md">Editorial & Brand Asset Control</h3>
+        <ul>
+          <li>High-Resolution Output — 300 DPI 인쇄 규격을 보장하는 포토샵 정밀 보정</li>
+          <li>Color Standardization — 브랜드 색상 중앙값 제어 및 벡터 그래픽 가공</li>
+          <li>GTQ 1급 · GTQi 1급 검증 보유</li>
+        </ul>
+      </div>
+      <div class="product-card reveal">
+        <h3 class="t-heading-md">Business & Finance Intelligence</h3>
+        <ul>
+          <li>재무회계 · 세무회계 지식 기반 디자인 리소스 대비 ROI 관점</li>
+          <li>CTR · ROAS 등 마케팅 지표를 정량적으로 예측·추적</li>
+          <li>수치 기반 인과 분석으로 설계 의사결정 뒷받침</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="band band-dark" id="credentials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Recognized Credentials</div>
+      <h2 class="t-heading-xl">국가 공인 및 전문 라이선스 4종</h2>
+      <p style="color:var(--body-dark)">숫자의 무결함과 시각 에셋 가공 능력을 함께 증명합니다.</p>
+    </div>
+
+    <div class="cred-grid">
+      <div class="cred-card reveal">
+        <div class="badge">2025.07</div>
+        <h3>AT (FAT 1급)</h3>
+        <div class="issuer">한국공인회계사회</div>
+        <p>ERP 정보 구조화 논리 및 재무 비용 구조 해독 능력</p>
+      </div>
+      <div class="cred-card reveal">
+        <div class="badge">2025.02</div>
+        <h3>전산회계 2급 (국가공인)</h3>
+        <div class="issuer">한국세무사회</div>
+        <p>수치 기반 인과 분석력 및 데이터 정합성 검증 능력</p>
+      </div>
+      <div class="cred-card reveal">
+        <div class="badge">2023.10</div>
+        <h3>GTQi (일러스트) 1급</h3>
+        <div class="issuer">한국생산성본부</div>
+        <p>벡터 그래픽 가공 및 인터페이스 아이콘 컴포넌트 설계</p>
+      </div>
+      <div class="cred-card reveal">
+        <div class="badge">2023.09</div>
+        <h3>GTQ (그래픽기술) 1급</h3>
+        <div class="issuer">한국생산성본부</div>
+        <p>픽셀 보정, 고해상도 리터칭 및 미디어 최적화 출력</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK EXPERIENCE -->
+<section class="band band-light" id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Work Experience</div>
+      <h2 class="t-heading-xl">실무 경력 3년</h2>
+      <p>인턴십, 주임 경력, 다차원의 브랜드 이슈 경험을 통해 완성된 실무 스케일입니다.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="exp-row">
+        <div class="exp-period">2023.10 — 2024.12<br>(1년 3개월)</div>
+        <div>
+          <div class="exp-org t-heading-md">자버 (Jaber) 디자인팀</div>
+          <div class="exp-role">UX/UI 디자인 인턴 · 어시스트 주임</div>
+          <ul>
+            <li>다국어 글로벌 웹 플랫폼 개발 디자인 — 언어별 문자열 길이에 대응하는 반응형 프레임 아키텍처</li>
+            <li>이기종 디바이스 크로스 QA — Slack·Notion 연동 이슈 추적 테이블 구축으로 개발팀 소통 단축</li>
+            <li>전사 비즈니스 에셋 규격화 — 인스타그램 카드뉴스, 서비스 카드 UI 설계</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-period">2021.04 — 2022.08<br>(1년 5개월)</div>
+        <div>
+          <div class="exp-org t-heading-md">스튜디오공실 (Studio 05) 디자인팀</div>
+          <div class="exp-role">디자인팀 주임</div>
+          <ul>
+            <li>패션 촬영·주얼리 촬영 기획 및 이미지 에셋화, 스튜디오 데탈컷 촬영 이관 보조</li>
+            <li>무역 사이트 상품 이미지 리터칭 — 300 DPI 규격 준수 픽셀 레벨 정밀 보정</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-period">Freelance</div>
+        <div>
+          <div class="exp-org t-heading-md">프리랜서 크리에이티브 클라이언트 업무</div>
+          <div class="exp-role">디자인 & 콘텐츠 기획</div>
+          <ul>
+            <li>엑스컴(X-com) 상세페이지 — 스크롤 반응률과 매출 전환율을 정량화한 레이아웃 기획</li>
+            <li>비근마켓 프로모션 카드뉴스 — 가독성 극대화 인포그래픽화 에셋 제작 및 최종 인쇄</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-period">2022.12 — 2023.03<br>(4개월)</div>
+        <div>
+          <div class="exp-org t-heading-md">H&M (스반디시 리스크 어소스 부문)</div>
+          <div class="exp-role">의류판매 SA (Store Advisor)</div>
+          <ul>
+            <li>매장 세일즈 및 긴급 대응 워크플로우 매뉴얼 설계 — 인수인계 시간 단축, 우수 사례로 표창</li>
+            <li>Stock 재고 관리 및 Till 결제 시스템 실시간 트래킹, VIP 예약 상태 모니터링</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:64px; margin-bottom:20px;">
+      <div class="eyebrow">Education</div>
+    </div>
+    <div class="reveal">
+      <div class="edu-row">
+        <span class="edu-name">서일대학교 세무회계학과</span>
+        <span class="edu-period">2017.02 — 2019.02 졸업</span>
+        <span class="edu-desc">대차대조표 원리 기반 재무 데이터 오류 점검 프로세스를 체득, 디자인 가이드라인 분석의 논리적 배경 구축</span>
+      </div>
+      <div class="edu-row">
+        <span class="edu-name">서운고등학교 문과계열</span>
+        <span class="edu-period">2015.03 — 2017.02 졸업</span>
+        <span class="edu-desc">인문학적 통찰, 논리적 글쓰기 및 타깃 분석 소통 능력 이수</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO WORK WITH ME -->
+<section class="band band-dark" id="collab">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">How to Work With Me</div>
+      <h2 class="t-heading-xl">협업을 위한 3대 약속</h2>
+    </div>
+    <div class="grid-3">
+      <div class="product-card-dark reveal">
+        <h3 class="t-heading-md">01 · 가이드라인 중심 협업</h3>
+        <p>타이포그래피 스펙과 오토 레이아웃 마진 같은 데까지 지켜, 개발 인계 단계에서 1픽셀의 불일치도 남기지 않습니다.</p>
+      </div>
+      <div class="product-card-dark reveal">
+        <h3 class="t-heading-md">02 · 프로세스 아카이빙</h3>
+        <p>모든 피드백과 결정 사항을 노션·지라 히스토리 테이블로 매뉴얼화해, 팀의 어느 누구도 병목을 스스로 해결할 수 있게 합니다.</p>
+      </div>
+      <div class="product-card-dark reveal">
+        <h3 class="t-heading-md">03 · 데이터 지향 개선</h3>
+        <p>재미성에만 의존하지 않고, 마케팅 효율 예측 해과 분석 지표를 근거로 정량적으로 설득력 있는 디자인을 제안합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / FOOTER -->
+<footer class="band contact-band" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div style="max-width:480px;">
+        <div class="eyebrow">Contact & Networks</div>
+        <h2 class="t-display-md">함께 일할 준비가<br>되어 있습니다</h2>
+        <div class="contact-links">
+          <a href="mailto:wkdgpwjd98@naver.com">✉ wkdgpwjd98@naver.com</a>
+          <span>☎ 010-9881-1313</span>
+          <span>📍 경기 고양시 일산동구</span>
+          <span>희망 연봉 2,800 ~ 3,000만 원</span>
+        </div>
+      </div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn-on-blue" href="mailto:wkdgpwjd98@naver.com">이메일 보내기</a>
+        <span class="btn btn-secondary-dark btn-disabled" style="border-color:rgba(255,255,255,0.3); font-size:15px;">포트폴리오 PDF 준비중</span>
+      </div>
+    </div>
+
+    <div class="foot-meta">
+      <span>© 2026 Jang Hye Jung. Logical Design Architect.</span>
+      <span>UX/UI Designer · Design System Coordinator · Seoul, Korea</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // philosophy expand
+  const toggle = document.getElementById('quoteToggle');
+  const more = document.getElementById('quoteMore');
+  const arrow = document.getElementById('toggleArrow');
+  toggle.addEventListener('click', () => {
+    const open = more.classList.toggle('open');
+    toggle.childNodes[0].textContent = open ? '접기 ' : '전체 이야기 읽기 ';
+    arrow.textContent = open ? '↑' : '↓';
+  });
+
+  // 모바일 햄버거 메뉴
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  function closeMobileMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+</script>
+
+</body>
+</html>
