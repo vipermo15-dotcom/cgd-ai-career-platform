@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>공동훈련센터 회의자료 — 재학생 진로 현황</title>
+<meta name="description" content="CGD 재학생 진로 현황 및 취업분야 — 사전 설문조사 반영 회의자료">
+<style>
+  :root {
+    --paper: #EEF1F0;
+    --paper-deep: #E3E7E4;
+    --surface: #FFFFFF;
+    --ink: #1C2624;
+    --ink-soft: #55645F;
+    --accent: #B8792F;
+    --accent-ink: #7A4F1D;
+    --accent-soft: #F1E2CC;
+    --structure: #3E6B62;
+    --structure-soft: #E1EAE7;
+    --line: #D4D9D5;
+    --font-kr: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, monospace;
+    --shadow: 0 1px 2px rgba(20, 30, 27, 0.04), 0 8px 24px -12px rgba(20, 30, 27, 0.12);
+  }
+  :root[data-theme="dark"] {
+    --paper: #14181A;
+    --paper-deep: #1B2124;
+    --surface: #1B2124;
+    --ink: #E7ECE9;
+    --ink-soft: #9BA8A2;
+    --accent: #D69A52;
+    --accent-ink: #F0C088;
+    --accent-soft: #3A2E1C;
+    --structure: #6FA89C;
+    --structure-soft: #1E2D2A;
+    --line: #2A3134;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14181A;
+      --paper-deep: #1B2124;
+      --surface: #1B2124;
+      --ink: #E7ECE9;
+      --ink-soft: #9BA8A2;
+      --accent: #D69A52;
+      --accent-ink: #F0C088;
+      --accent-soft: #3A2E1C;
+      --structure: #6FA89C;
+      --structure-soft: #1E2D2A;
+      --line: #2A3134;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-kr);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .doc {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+  }
+
+  /* Header */
+  .doc-head {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 32px;
+  }
+  .doc-head .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--structure);
+    font-weight: 600;
+  }
+  .doc-head h1 {
+    font-size: clamp(24px, 4vw, 30px);
+    line-height: 1.35;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .doc-head .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+  .doc-head .meta b { color: var(--ink); font-weight: 600; }
+
+  /* Stat strip */
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 44px;
+    box-shadow: var(--shadow);
+  }
+  .stat {
+    background: var(--surface);
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stat .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(20px, 3.4vw, 26px);
+    font-weight: 700;
+    color: var(--accent-ink);
+    letter-spacing: -0.02em;
+  }
+  .stat .num small { font-size: 0.5em; font-weight: 500; color: var(--ink-soft); margin-left: 2px; }
+  .stat .label { font-size: 12px; color: var(--ink-soft); line-height: 1.4; }
+  @media (max-width: 560px) {
+    .stat-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Section */
+  section { margin-bottom: 40px; }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .sec-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--structure);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .sec-head h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .sec-note {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: -10px 0 18px;
+  }
+
+  /* Bar list */
+  .bar-list { display: flex; flex-direction: column; gap: 10px; }
+  .bar-row {
+    display: grid;
+    grid-template-columns: 168px 1fr 56px;
+    align-items: center;
+    gap: 12px;
+    font-size: 13.5px;
+  }
+  .bar-row .name { color: var(--ink); }
+  .bar-track {
+    position: relative;
+    height: 9px;
+    background: var(--paper-deep);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    position: absolute; inset: 0 auto 0 0;
+    height: 100%;
+    border-radius: 5px;
+    background: var(--structure);
+  }
+  .bar-fill.accent { background: var(--accent); }
+  .bar-row .pct {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-align: right;
+  }
+  @media (max-width: 560px) {
+    .bar-row { grid-template-columns: 108px 1fr 44px; }
+  }
+
+  /* two-col split for status + form */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (max-width: 640px) { .split { grid-template-columns: 1fr; } }
+
+  .subhead {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+
+  /* pill row */
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    font-size: 12.5px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: var(--paper-deep);
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+  }
+
+  /* callout */
+  .callout {
+    background: var(--structure-soft);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+  .callout b { color: var(--structure); }
+  .callout.warn { background: var(--accent-soft); }
+  .callout.warn b { color: var(--accent-ink); }
+
+  /* checklist */
+  .agenda { display: flex; flex-direction: column; gap: 10px; }
+  .agenda-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .agenda-item .n {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent-ink);
+    background: var(--accent-soft);
+    border-radius: 6px;
+    padding: 2px 7px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-soft);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: var(--font-mono);
+  }
+
+  @media print {
+    body { background: #fff; }
+    .stat-strip { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="doc">
+
+  <div class="doc-head">
+    <span class="kicker">공동훈련센터 회의자료</span>
+    <h1>재학생 진로 현황 및 취업분야<br>— 사전 설문조사 반영</h1>
+    <div class="meta">
+      <span><b>작성일</b> 2026.07.22</span>
+      <span><b>대상</b> 서울시기술교육원 컴퓨터그래픽디자인과</span>
+      <span><b>출처</b> CGD 취업지원 플랫폼 사전 설문·진로지도 데이터</span>
+    </div>
+  </div>
+
+  <div class="stat-strip">
+    <div class="stat">
+      <div class="num">25<small>명</small></div>
+      <div class="label">전체 재학생</div>
+    </div>
+    <div class="stat">
+      <div class="num">60<small>%</small></div>
+      <div class="label">사전 설문 참여율<br>(15명 제출)</div>
+    </div>
+    <div class="stat">
+      <div class="num">2<small>명</small></div>
+      <div class="label">진로 트랙 확정<br>(22명 미정)</div>
+    </div>
+    <div class="stat">
+      <div class="num">1<small>명</small></div>
+      <div class="label">현재 지원중<br>(취업확정 0명)</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-eyebrow">01</span>
+      <h2>재학생 진로 현황</h2>
+    </div>
+
+    <div class="split">
+      <div>
+        <p class="subhead">취업 상태 분포</p>
+        <div class="bar-list">
+          <div class="bar-row"><span class="name">미시작</span><div class="bar-track"><div class="bar-fill" style="width:52%"></div></div><span class="pct">13명·52%</span></div>
+          <div class="bar-row"><span class="name">준비중</span><div class="bar-track"><div class="bar-fill" style="width:44%"></div></div><span class="pct">11명·44%</span></div>
+          <div class="bar-row"><span class="name">지원중</span><div class="bar-track"><div class="bar-fill" style="width:4%"></div></div><span class="pct">1명·4%</span></div>
+          <div class="bar-row"><span class="name">취업확정</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="pct">0명·0%</span></div>
+        </div>
+      </div>
+      <div>
+        <p class="subhead">사전설문 · 진로트랙</p>
+        <div class="bar-list">
+          <div class="bar-row"><span class="name">설문 제출완료</span><div class="bar-track"><div class="bar-fill accent" style="width:60%"></div></div><span class="pct">15명·60%</span></div>
+          <div class="bar-row"><span class="name">설문 미제출</span><div class="bar-track"><div class="bar-fill accent" style="width:40%"></div></div><span class="pct">10명·40%</span></div>
+          <div class="bar-row"><span class="name">매칭자료 보유</span><div class="bar-track"><div class="bar-fill accent" style="width:16%"></div></div><span class="pct">4명·16%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="sec-note" style="margin-top:20px;">사전 설문 미제출 10명 — 개별 명단은 담당 학과장이 별도 확인 후 독려 예정</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-eyebrow">02</span>
+      <h2>취업분야 (설문 응답 15명 기준)</h2>
+    </div>
+
+    <p class="subhead">희망 근무형태</p>
+    <div class="bar-list" style="margin-bottom:24px;">
+      <div class="bar-row"><span class="name">정규직</span><div class="bar-track"><div class="bar-fill" style="width:67%"></div></div><span class="pct">10명·67%</span></div>
+      <div class="bar-row"><span class="name">무관</span><div class="bar-track"><div class="bar-fill" style="width:33%"></div></div><span class="pct">5명·33%</span></div>
+    </div>
+
+    <p class="subhead">희망 업종 (복수응답, 빈도순)</p>
+    <div class="bar-list" style="margin-bottom:24px;">
+      <div class="bar-row"><span class="name">브랜드·편집·출판</span><div class="bar-track"><div class="bar-fill accent" style="width:100%"></div></div><span class="pct">5명</span></div>
+      <div class="bar-row"><span class="name">캐릭터·굿즈</span><div class="bar-track"><div class="bar-fill accent" style="width:60%"></div></div><span class="pct">3명</span></div>
+      <div class="bar-row"><span class="name">광고·콘텐츠기획</span><div class="bar-track"><div class="bar-fill accent" style="width:60%"></div></div><span class="pct">3명</span></div>
+      <div class="bar-row"><span class="name">IT·스타트업</span><div class="bar-track"><div class="bar-fill accent" style="width:60%"></div></div><span class="pct">3명</span></div>
+      <div class="bar-row"><span class="name">뷰티·패션·엔터</span><div class="bar-track"><div class="bar-fill accent" style="width:40%"></div></div><span class="pct">2명</span></div>
+      <div class="bar-row"><span class="name">도서·교육교재</span><div class="bar-track"><div class="bar-fill accent" style="width:40%"></div></div><span class="pct">2명</span></div>
+    </div>
+
+    <p class="subhead">생성형 AI 활용도</p>
+    <div class="bar-list">
+      <div class="bar-row"><span class="name">자주 사용</span><div class="bar-track"><div class="bar-fill" style="width:87%"></div></div><span class="pct">13명·87%</span></div>
+      <div class="bar-row"><span class="name">가끔 사용</span><div class="bar-track"><div class="bar-fill" style="width:13%"></div></div><span class="pct">2명·13%</span></div>
+    </div>
+
+    <div class="callout warn" style="margin-top:20px;">
+      <b>점검 필요</b> — 희망연봉·희망지역·취업가능시기 문항은 응답자 15명 전원 값이 비어 있어, 설문 노출 또는 저장 로직 확인이 필요합니다.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-eyebrow">03</span>
+      <h2>오늘 논의 안건</h2>
+    </div>
+    <div class="agenda">
+      <div class="agenda-item"><span class="n">01</span><span>사전 설문 미제출 10명에 대한 개별 독려 방안</span></div>
+      <div class="agenda-item"><span class="n">02</span><span>진로 트랙 미확정 22명 대상 학과장 1:1 상담 일정 수립</span></div>
+      <div class="agenda-item"><span class="n">03</span><span>브랜드·편집·출판 및 캐릭터·굿즈 계열 수요에 대응하는 채용처 매칭 강화</span></div>
+      <div class="agenda-item"><span class="n">04</span><span>희망연봉·지역·취업가능시기 설문 데이터 미수집 건 시스템 점검</span></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>CGD 취업지원 플랫폼 · 진로지도 데이터</span>
+    <span>2026-07-22</span>
+  </footer>
+
+</div>
+</body>
+</html>
