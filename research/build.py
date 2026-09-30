@@ -8,9 +8,10 @@ EXCLUDE = {"장아름", "김규연", "박민서"}  # 배포 제외 대상(요청
 
 CSS = """
 :root{--bg:#f6f7f9;--card:#fff;--ink:#1c2230;--sub:#5d6675;--line:#e3e6ec;--acc:#2f5bea;--ok:#12805c;--warn:#b45309}
-@media(prefers-color-scheme:dark){:root{--bg:#12151b;--card:#1b2029;--ink:#e8ebf1;--sub:#9aa3b2;--line:#2b3240;--acc:#7c9cff;--ok:#4cc79a;--warn:#f0a955}}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12151b;--card:#1b2029;--ink:#e8ebf1;--sub:#9aa3b2;--line:#2b3240;--acc:#7c9cff;--ok:#4cc79a;--warn:#f0a955;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#12151b;--card:#1b2029;--ink:#e8ebf1;--sub:#9aa3b2;--line:#2b3240;--acc:#7c9cff;--ok:#4cc79a;--warn:#f0a955;color-scheme:dark}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif}
-.wrap{max-width:860px;margin:0 auto;padding:24px 16px 64px}
+.wrap{max-width:860px;margin:0 auto;padding:24px 16px 64px;min-width:0}dd{min-width:0;overflow-wrap:anywhere}
 h1{font-size:22px;margin:0 0 4px}.meta{color:var(--sub);font-size:13px}
 .box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}
 .tools{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
@@ -29,7 +30,7 @@ label.done{font-size:13px;color:var(--sub);margin-left:12px}
 """
 
 JS = """
-const KEY=document.body.dataset.key;let st={};
+const KEY=document.querySelector('[data-key]').dataset.key;let st={};
 try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
 const jobs=[...document.querySelectorAll('.job')];
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
@@ -83,6 +84,10 @@ def build(path):
 {jobs}
 <div class="foot">공고는 수시로 마감·변경됩니다. 지원 전 반드시 원문 공고에서 마감일과 조건을 다시 확인하세요. 이 파일은 개인 진로 정보를 포함하므로 타인에게 공유하지 마세요. 지원 완료 체크는 이 브라우저에만 저장됩니다.</div>
 </div><script>{JS}</script></body></html>"""
+    body = doc[doc.index('<div class="wrap">'):doc.index('</script>') + 9]
+    frag = f'<title>{E(name)} 추천 채용공고</title><style>{CSS}body{{background:var(--bg);color:var(--ink)}}</style>\n<div data-key="cgd-jobs-{E(name)}">{body}</div>'
+    os.makedirs(os.path.join(HERE, "artifact"), exist_ok=True)
+    open(os.path.join(HERE, "artifact", f"{name}.html"), "w", encoding="utf-8").write(frag)
     out = os.path.join(HERE, "out", f"{name}_추천채용공고.html")
     open(out, "w", encoding="utf-8").write(doc)
     return out, len(d["jobs"])
