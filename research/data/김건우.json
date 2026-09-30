@@ -1,0 +1,317 @@
+{
+  "name": "김건우",
+  "profile_summary": "경기 성남 거주 24세. Premiere Pro·After Effects·Photoshop·Illustrator와 생성형 AI 4종(Gemini, ChatGPT, Midjourney, Claude)을 다루며 광고콘텐츠·SNS·숏폼 작업물이 있고 GTQ 1급을 보유. 희망 업종은 광고·영상콘텐츠 제작이며 추천 직무는 AI 영상콘텐츠 디자이너, SNS 콘텐츠 마케터(영상), 광고대행사 영상 크리에이티브.",
+  "target_roles": [
+    "AI 영상콘텐츠 디자이너",
+    "SNS 콘텐츠 마케터(영상)",
+    "광고대행사 영상 크리에이티브",
+    "미디어커머스 숏폼 영상 에디터"
+  ],
+  "researched_at": "2026-09-30",
+  "shortfall": "시너윗(1순위로 문서에 적힌 취업처)의 영상 에디터 공고는 마감(9/16) 상태였고, 스튜디오에피소드·돌고래유괴단은 현재 접수 중인 공고를 확인하지 못해 제외함. 센시엘·상상스퀘어는 공고 상세가 이미지여서 요건을 텍스트로 확인하지 못함(존재·마감일·직무만 확인). 10건은 채웠으나 경력 1년 이상 요구 공고(에이펙스코어, 미미월드, 상상스퀘어)가 3건 포함됨.",
+  "jobs": [
+    {
+      "rank": 1,
+      "company": "카이앤컴퍼니",
+      "title": "AI 콘텐츠 크리에이터 (영상·광고소재·숏폼 / 신입 가능)",
+      "location": "서울 서초구 방배동",
+      "employment_type": "정규직(수습 3개월)",
+      "experience": "신입·경력 (연수 무관)",
+      "salary": "연봉 2,880만원",
+      "deadline": "2026-10-24",
+      "required": [
+        "신입/경력 무관, 고등학교 졸업 이상(졸업예정자 가능)",
+        "포트폴리오(PDF/링크) 제출 필수 - 개인 작업물·학교 과제 가능"
+      ],
+      "preferred": [
+        "Meta 광고 소재 제작 경험",
+        "숏폼 후킹·전개 구조 이해",
+        "생성형 AI(Midjourney, Runway, Kling, Veo 등) 활용 경험",
+        "Premiere Pro, After Effects, Photoshop, Figma, CapCut",
+        "이커머스·상세페이지 제작 경험"
+      ],
+      "tools": [
+        "Premiere Pro",
+        "After Effects",
+        "Photoshop",
+        "Figma",
+        "CapCut",
+        "Midjourney",
+        "ChatGPT"
+      ],
+      "url": "https://m.jobkorea.co.kr/Recruit/GI_Read/50050862",
+      "source": "잡코리아",
+      "match_score": 92,
+      "match_reason": "AI 툴 4종 활용과 숏폼·광고 콘텐츠 작업물이 이 공고의 업무(AI 광고소재·숏폼 기획/편집)와 직접 일치하고 신입·졸업예정자를 명시적으로 환영함.",
+      "gap": "Meta 광고 성과 지표(CTR·ROAS) 경험이 없고, 지원 시 AI 활용 방식 등 3개 질문에 답해야 함.",
+      "prep_tip": "AI 제작과정 스크린샷이 담긴 숏폼 포트폴리오와 후킹 3초 설명 준비. 지원서 3개 질문(대표작 역할, AI 활용법, 제품 사진 한 장으로 만들 콘텐츠)을 미리 작성."
+    },
+    {
+      "rank": 2,
+      "company": "㈜미라클스",
+      "title": "영상 컨텐츠 제작 담당자 (신입/경력 1~5년)",
+      "location": "서울 서초구 논현로 175",
+      "employment_type": "정규직(수습 3개월)",
+      "experience": "신입 / 경력 1~5년",
+      "salary": null,
+      "deadline": "2026-10-26",
+      "required": [
+        "신입 또는 경력 1~5년, 학력무관(졸업예정자 가능)",
+        "Premiere Pro, After Effects 등 영상 편집 툴 능숙",
+        "기획~촬영~편집 전반 이해",
+        "포트폴리오 제출 필수(미첨부 시 지원 불가)"
+      ],
+      "preferred": [
+        "숏폼·광고 영상 감각",
+        "AI 영상 툴(Seedance, Kling, Higgsfield 등) 및 이미지 생성 툴(Midjourney, Nano Banana, Flux) 활용 경험",
+        "AI로 기획~편집을 완결한 포트폴리오",
+        "영상·미디어·광고 관련 전공"
+      ],
+      "tools": [
+        "Premiere Pro",
+        "After Effects",
+        "AI 영상/이미지 생성 툴"
+      ],
+      "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=55113336",
+      "source": "사람인",
+      "match_score": 90,
+      "match_reason": "Premiere·AE 보유와 AI 4종 활용, 광고·숏폼 작업이 업무(캠페인 영상, 숏폼, 모션그래픽, AI 툴 활용)와 맞고 신입 지원 가능.",
+      "gap": "우대 AI 영상 툴(Seedance, Kling, Higgsfield)과 촬영·조명 장비 경험은 문서에 없음. 포트폴리오 미첨부 시 지원 불가.",
+      "prep_tip": "Kling 등 AI 영상 툴로 기획~편집을 완결한 사례 1건과 스토리보드를 포트폴리오에 추가."
+    },
+    {
+      "rank": 3,
+      "company": "㈜아루",
+      "title": "콘텐츠 디자이너 (광고 콘텐츠·상세페이지)",
+      "location": "서울 강남구 역삼동",
+      "employment_type": "정규직(수습 3개월 후 전환 평가)",
+      "experience": "신입",
+      "salary": null,
+      "deadline": "2026-10-18",
+      "required": [
+        "학력무관",
+        "포토샵·일러스트 등 디자인 프로그램 활용",
+        "기획 의도를 맥락과 목적에 맞게 표현",
+        "디자인 전공자 또는 준하는 경험"
+      ],
+      "preferred": [
+        "커머스·상세페이지·광고 소재 제작 경험",
+        "생성형 AI로 그래픽을 시각화해 본 경험",
+        "여성 소비재(뷰티 등) 관심"
+      ],
+      "tools": [
+        "Illustrator",
+        "Photoshop"
+      ],
+      "url": "https://m.jobkorea.co.kr/Recruit/GI_Read/50016440",
+      "source": "잡코리아",
+      "match_score": 72,
+      "match_reason": "광고 콘텐츠 제작 경험과 Photoshop·Illustrator, 생성형 AI 활용이 요건과 맞고 신입 대상 공고임.",
+      "gap": "영상 위주 포트폴리오라 상세페이지·프로모션 페이지 제작 경험이 부족함.",
+      "prep_tip": "Midjourney+Photoshop 광고 비주얼 과정 작업물을 앞세우고 상세페이지 1건 제작해 보완."
+    },
+    {
+      "rank": 4,
+      "company": "센시엘",
+      "title": "[미디어커머스] 영상편집자 (숏폼 광고)",
+      "location": "서울 송파구 위례서로 252 (거여동)",
+      "employment_type": "정규직(수습 3개월)",
+      "experience": "경력무관",
+      "salary": null,
+      "deadline": "2026-10-17",
+      "required": [
+        "경력무관, 학력무관",
+        "(상세 요건은 이미지 게시물이라 텍스트 확인 불가)"
+      ],
+      "preferred": [],
+      "tools": [],
+      "url": "https://m.jobkorea.co.kr/Recruit/GI_Read/49803680",
+      "source": "잡코리아",
+      "match_score": 80,
+      "match_reason": "희망 직무인 미디어커머스 숏폼 광고 영상 편집과 동일하며 경력무관·학력무관임.",
+      "gap": "공고 상세가 이미지라 세부 요건을 텍스트로 확인하지 못함. 근무지가 성남에서 다소 멂.",
+      "prep_tip": "30초 숏폼 광고 2~3편과 후킹 3초·CTA 구성 근거를 정리해 지원."
+    },
+    {
+      "rank": 5,
+      "company": "㈜에이아이투모바일",
+      "title": "콘텐츠 디자이너 - SNS·광고 콘텐츠 제작 / AI 활용",
+      "location": "서울 마포구 마포동",
+      "employment_type": "정규직(수습 3개월)",
+      "experience": "경력무관",
+      "salary": "연봉 3,000~5,000만원(면접 후 결정)",
+      "deadline": "2026-10-14",
+      "required": [
+        "경력무관, 학력무관"
+      ],
+      "preferred": [
+        "유관업무 경험자(인턴·알바)",
+        "관련 자격증 보유자"
+      ],
+      "tools": [
+        "Figma",
+        "Photoshop",
+        "Canva"
+      ],
+      "url": "https://m.jobkorea.co.kr/Recruit/GI_Read/49982512",
+      "source": "잡코리아",
+      "match_score": 75,
+      "match_reason": "SNS·광고 콘텐츠 제작에 AI 활용을 내세운 공고로 AI 4종 활용 이력이 강점이 됨.",
+      "gap": "요구 스킬이 Figma·Photoshop·Canva 중심이라 영상 비중이 불명확하고 Figma는 보유 툴에 없음.",
+      "prep_tip": "AI 활용 SNS 시리즈(3편 이상)와 카드뉴스류 정지 이미지 작업을 함께 준비."
+    },
+    {
+      "rank": 6,
+      "company": "프렌치럭셔리",
+      "title": "릴스 컨텐츠 PD (브랜드 SNS 숏폼)",
+      "location": "인천 남동구 은봉로 52",
+      "employment_type": "정규직(수습 2개월)",
+      "experience": "경력 무관 (신입 지원 가능)",
+      "salary": null,
+      "deadline": "2026-10-27",
+      "required": [
+        "대학졸업(2,3년제) 이상, 졸업예정자 가능",
+        "숏폼 영상 편집 능력(CapCut/Premiere 등)",
+        "촬영 가능자(아이폰 또는 카메라)",
+        "영상 스토리 구성 능력, SNS 트렌드 이해",
+        "포트폴리오(영상 또는 디자인) 제출"
+      ],
+      "preferred": [
+        "브랜드 숏폼 콘텐츠 제작 경험",
+        "패션·뷰티·리빙 영상 경험",
+        "광고용 소재(Meta/Google/Naver) 제작 경험"
+      ],
+      "tools": [
+        "CapCut",
+        "Premiere Pro"
+      ],
+      "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=54882510",
+      "source": "사람인",
+      "match_score": 68,
+      "match_reason": "릴스·쇼츠 중심 브랜드 숏폼 기획·촬영·편집 직무로 숏폼 경험과 운전면허(이동)가 도움 됨.",
+      "gap": "촬영 및 대표 출연 영상 촬영 업무가 포함되고 근무지가 인천 남동구라 성남에서 통근 부담.",
+      "prep_tip": "직접 촬영한 숏폼(아이폰 촬영 가능 여부) 포함 포트폴리오, 패션·뷰티 소재 사례 준비."
+    },
+    {
+      "rank": 7,
+      "company": "㈜씨티애드",
+      "title": "컨텐츠 및 그래픽 디자이너 (AI 활용 능력이 뛰어난 빌더)",
+      "location": "서울 금천구 가산동",
+      "employment_type": "정규직",
+      "experience": "경력무관",
+      "salary": "연봉 4,500만원 이상(면접 후 결정)",
+      "deadline": "2026-10-18",
+      "required": [
+        "경력무관, 학력무관",
+        "Figma, Illustrator, Photoshop 활용",
+        "AI 도구(Claude Code, Codex, Antigravity 등) 활용 역량"
+      ],
+      "preferred": [],
+      "tools": [
+        "Figma",
+        "Illustrator",
+        "Photoshop",
+        "Claude Code",
+        "Codex"
+      ],
+      "url": "https://m.jobkorea.co.kr/Recruit/GI_Read/50021726",
+      "source": "잡코리아",
+      "match_score": 66,
+      "match_reason": "AI 활용 그래픽 디자이너 공고이고 신입 요건 제한이 없어 지원 가능.",
+      "gap": "직무가 영상보다 그래픽 중심이고 요구 스킬(Figma, Claude Code, Codex)이 개발 도구까지 포함됨. 연봉 4,500만 이상이라 경쟁이 셀 수 있음.",
+      "prep_tip": "Claude 등 AI를 디자인 작업에 활용한 사례를 구체적 과정과 함께 제시."
+    },
+    {
+      "rank": 8,
+      "company": "에이펙스코어㈜",
+      "title": "브랜드 콘텐츠 디자이너",
+      "location": "서울 강남구 신사동",
+      "employment_type": "정규직(수습 3개월)",
+      "experience": "경력 1년 이상",
+      "salary": "연봉 3,500~4,000만원(면접 후 결정)",
+      "deadline": "2026-10-14",
+      "required": [
+        "Photoshop, Illustrator 활용",
+        "웹/모바일 환경을 고려한 디자인",
+        "상세페이지·광고 소재 제작 경험",
+        "AI 활용 영상 생성 및 편집",
+        "기본 영상 컷 편집·자막·BGM·간단한 숏폼 제작(전문가 수준 불요)"
+      ],
+      "preferred": [
+        "생성형 AI를 시안·소재 확장·영상 제작에 활용",
+        "CapCut, Premiere Pro, After Effects",
+        "이커머스·소비재 브랜드 디자인 경험",
+        "퍼포먼스 광고 소재 제작 및 A/B 테스트 경험"
+      ],
+      "tools": [
+        "Photoshop",
+        "Illustrator",
+        "Premiere Pro",
+        "After Effects",
+        "CapCut",
+        "생성형 AI"
+      ],
+      "url": "https://m.jobkorea.co.kr/Recruit/GI_Read/49984128",
+      "source": "잡코리아",
+      "match_score": 64,
+      "match_reason": "광고 소재·SNS 콘텐츠·숏폼 편집·AI 툴 활용 업무가 포함돼 광고콘텐츠 경험과 맞음.",
+      "gap": "경력 1년 이상 요구, 상세페이지·퍼포먼스 광고 소재 경험은 없음. 마감이 2주 남음.",
+      "prep_tip": "광고 배너·상세 이미지 작업을 추가하고 AI 활용 효율화 사례를 강조."
+    },
+    {
+      "rank": 9,
+      "company": "미미월드",
+      "title": "영상 콘텐츠 마케터 (숏폼/롱폼 편집)",
+      "location": "경기 안양시 외",
+      "employment_type": "정규직 추정(공고에 미기재)",
+      "experience": "경력 1년 이상",
+      "salary": null,
+      "deadline": "2026-10-11",
+      "required": [
+        "유튜브·인스타 숏폼/롱폼 영상 제작 경험",
+        "Premiere Pro, After Effects 등 편집 툴 능숙",
+        "포트폴리오 제출 필수"
+      ],
+      "preferred": [
+        "유아동·키즈 영상 경험",
+        "AI 영상 제작 도구 적극 활용",
+        "직접 촬영(카메라·조명) 가능"
+      ],
+      "tools": [
+        "Premiere Pro",
+        "After Effects"
+      ],
+      "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=55104216",
+      "source": "사람인",
+      "match_score": 55,
+      "match_reason": "숏폼/롱폼 편집, 색보정, 자막 등 영상 편집 업무와 Premiere·AE 요건이 맞음.",
+      "gap": "경력 1년 이상 요구이며 이커머스·키즈 브랜드 경험 없음. 마감(10/11)이 가까움. 근무지 안양.",
+      "prep_tip": "숏폼 결과물과 편집 판단 근거를 담은 포트폴리오로 경력 공백을 보완하고 마감 전 지원."
+    },
+    {
+      "rank": 10,
+      "company": "(주)상상스퀘어",
+      "title": "미디어팀 영상PD [재택/연차 23일]",
+      "location": "경기 성남시 분당구 성남대로43번길 10",
+      "employment_type": "공고에 미기재",
+      "experience": "경력 1년(목록 표기)",
+      "salary": null,
+      "deadline": "2026-10-21",
+      "required": [
+        "경력 1년, 고졸 이상(목록 표기)",
+        "(상세 요건은 이미지 게시물이라 텍스트 확인 불가)"
+      ],
+      "preferred": [],
+      "tools": [
+        "Premiere Pro",
+        "Photoshop"
+      ],
+      "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=55103694",
+      "source": "사람인",
+      "match_score": 52,
+      "match_reason": "성남 분당 근무·재택 병행 영상PD 직무로 통근이 가장 가까움.",
+      "gap": "공고 상세가 이미지라 자격요건을 확인하지 못했고 목록상 경력 1년 표기.",
+      "prep_tip": "공고 원문 이미지를 직접 확인한 뒤 요건 충족 여부를 판단하고 지원."
+    }
+  ]
+}
