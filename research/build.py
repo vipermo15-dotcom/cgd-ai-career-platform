@@ -4,6 +4,7 @@ import json, glob, os, html
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 E = html.escape
+EXCLUDE = {"장아름", "김규연", "박민서"}  # 배포 제외 대상(요청). 조사 원본 data/는 보존
 
 CSS = """
 :root{--bg:#f6f7f9;--card:#fff;--ink:#1c2230;--sub:#5d6675;--line:#e3e6ec;--acc:#2f5bea;--ok:#12805c;--warn:#b45309}
@@ -89,4 +90,6 @@ def build(path):
 
 if __name__ == "__main__":
     for p in sorted(glob.glob(os.path.join(HERE, "data", "*.json"))):
+        if json.load(open(p, encoding="utf-8"))["name"] in EXCLUDE:
+            continue
         print(build(p))
