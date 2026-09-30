@@ -1,0 +1,227 @@
+{
+ "name": "장혜정",
+ "profile_summary": "랜딩페이지 기준 UX/UI·디자인시스템 코디네이터를 목표로 하며 Figma(오토 레이아웃·Variables)를 핵심 툴로 명시. GTQ·GTQi 1급, 전산회계 2급, FAT 1급 보유, 자버(Jaber) UX/UI 인턴·주임 경력 약 1년 3개월과 &Other Stories 매장 근무를 기재. 포트폴리오 가이드 문서는 이커머스 SNS·콘텐츠·편집 방향이지만 랜딩페이지의 목표 직무는 UX/UI라서 UX/UI 공고를 중심으로 조사.",
+ "target_roles": [
+  "UX/UI 디자이너",
+  "프로덕트 디자이너",
+  "디자인시스템 코디네이터"
+ ],
+ "researched_at": "2026-09-30",
+ "shortfall": "문서 간 방향이 다름(포트폴리오 가이드=이커머스 콘텐츠, 랜딩페이지=UX/UI)이라 랜딩페이지의 목표 직무를 기준으로 삼음. 랜딩페이지의 '실무 경력 3년' 표기와 세부 경력(약 1년 3개월+매장 근무)이 달라 신입·경력무관 공고 위주로 선정. 사람인 검색 결과 페이지(2026-09-30 조회)에서 제목·근무지·경력·학력·고용형태·마감일을 확인했고 개별 공고 페이지는 Firecrawl 요청 제한과 이미지/iframe 본문 때문에 재확인·본문 추출을 못 해 required/preferred/tools는 제목·직무태그 범위만 기재. 급여는 표기된 경우만 기재. 문서상 이커머스 취업처(카카오스타일·올리브영·마켓컬리·29CM)는 현재 접수 중 공고를 확인하지 못해 제외. 상세 본문이 이미지/iframe이라 자동 추출 불가한 항목은 비워 둠(공고 목록·페이지 메타데이터로 확인한 제목·경력·학력·마감일만 기재) tools는 검색결과 직무태그에 명시된 것만 기재(나머지는 빈 배열). match_reason의 툴 언급은 프로필 기준 추정이며 공고 본문 확인 사항이 아님.",
+ "jobs": [
+  {
+   "rank": 1,
+   "company": "(주)블링크아이웨어",
+   "title": "UX/UI 디자이너(신입)",
+   "location": "서울 마포구",
+   "employment_type": "정규직",
+   "experience": "신입",
+   "salary": null,
+   "deadline": "2026-10-20",
+   "required": [
+    "초대졸 이상"
+   ],
+   "preferred": [],
+   "tools": [
+    "HTML"
+   ],
+   "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=55088058",
+   "source": "사람인",
+   "match_score": 90,
+   "match_reason": "신입 UX/UI 공고로 Figma·HTML 태그가 있고 자버 UX/UI 인턴 경력이 직접 근거.",
+   "gap": "이커머스/아이웨어 도메인 경험 없음.",
+   "prep_tip": "Figma 컴포넌트·Variables 기반 UI 케이스스터디 제출."
+  },
+  {
+   "rank": 2,
+   "company": "(주)러닝포인트",
+   "title": "앱/웹 서비스 디자인 기획(UI/UX)",
+   "location": "서울 마포구",
+   "employment_type": "정규직",
+   "experience": "신입·경력",
+   "salary": null,
+   "deadline": "2026-10-28",
+   "required": [
+    "대졸 이상"
+   ],
+   "preferred": [],
+   "tools": [],
+   "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=55146527",
+   "source": "사람인",
+   "match_score": 85,
+   "match_reason": "앱/웹 서비스 UI/UX와 기획 결합으로 데이터 정합성·문서화 강점이 활용됨.",
+   "gap": "서비스 기획 실무 경험은 제한적.",
+   "prep_tip": "서비스 기획서+와이어프레임+UI 흐름을 한 세트로 제시."
+  },
+  {
+   "rank": 3,
+   "company": "(주)크리에이티브소프트",
+   "title": "APP & Web UI·UX디자인 신입/경력 채용",
+   "location": "서울 금천구",
+   "employment_type": "정규직",
+   "experience": "신입·경력",
+   "salary": null,
+   "deadline": "2026-10-14",
+   "required": [
+    "초대졸 이상"
+   ],
+   "preferred": [],
+   "tools": [],
+   "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=55032765",
+   "source": "사람인",
+   "match_score": 83,
+   "match_reason": "앱·웹 UI/UX 신입 지원 가능. 자버 프로젝트(반응형·크로스 QA)가 근거.",
+   "gap": "마감 10/14.",
+   "prep_tip": "다국어 반응형 프레임 사례를 중심으로 정리."
+  },
+  {
+   "rank": 4,
+   "company": "레이팩트",
+   "title": "레이팩트에서 함께할 UI/UX디자이너를 찾습니다.(신입/경력)",
+   "location": "서울 마포구",
+   "employment_type": "정규직",
+   "experience": "경력무관",
+   "salary": null,
+   "deadline": "2026-11-28",
+   "required": [
+    "학력무관"
+   ],
+   "preferred": [],
+   "tools": [
+    "HTML"
+   ],
+   "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=55145449",
+   "source": "사람인",
+   "match_score": 82,
+   "match_reason": "신입/경력 UI/UX 공고로 Figma·HTML 활용.",
+   "gap": "공고 본문 세부 미확인.",
+   "prep_tip": "프론트엔드 인수인계를 고려한 컴포넌트 문서 준비."
+  },
+  {
+   "rank": 5,
+   "company": "(주)팀에버플",
+   "title": "Product / UX.UI Designer",
+   "location": "서울 마포구",
+   "employment_type": "정규직·계약직",
+   "experience": "경력무관",
+   "salary": null,
+   "deadline": "2026-10-22",
+   "required": [
+    "초대졸 이상"
+   ],
+   "preferred": [],
+   "tools": [],
+   "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=55098087",
+   "source": "사람인",
+   "match_score": 80,
+   "match_reason": "프로덕트/UX·UI 디자이너로 디자인시스템·정합성 강점 활용.",
+   "gap": "프로덕트 지표 기반 개선 경험 부족.",
+   "prep_tip": "CTR·ROAS 등 지표 기반 UI 개선 사례 정리."
+  },
+  {
+   "rank": 6,
+   "company": "주식회사쿄우마(KYOUMA)",
+   "title": "UX/UI디자이너 모집",
+   "location": "서울 서초구",
+   "employment_type": "정규직·계약직",
+   "experience": "신입·경력",
+   "salary": null,
+   "deadline": "2026-11-16",
+   "required": [
+    "학력무관"
+   ],
+   "preferred": [],
+   "tools": [],
+   "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=55062665",
+   "source": "사람인",
+   "match_score": 78,
+   "match_reason": "신입·경력 UX/UI 공고로 GTQ 1급 및 Figma 역량 활용.",
+   "gap": "공고 본문 세부 미확인.",
+   "prep_tip": "웹/모바일 UI 3개 이상 프로젝트 준비."
+  },
+  {
+   "rank": 7,
+   "company": "(주)에덴룩스",
+   "title": "인하우스 UI UX 디자인 전공, APP WEB 디자이너 채용",
+   "location": "서울 금천구",
+   "employment_type": "정규직",
+   "experience": "경력무관",
+   "salary": null,
+   "deadline": "2026-10-29",
+   "required": [
+    "학력무관"
+   ],
+   "preferred": [],
+   "tools": [],
+   "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=55149225",
+   "source": "사람인",
+   "match_score": 76,
+   "match_reason": "인하우스 앱·웹 UI/UX 공고로 신입 지원 가능.",
+   "gap": "디자인 전공이 아니라는 점 보완 필요.",
+   "prep_tip": "비전공 배경을 데이터 정합성·문서화 강점으로 연결."
+  },
+  {
+   "rank": 8,
+   "company": "(주)포켓컴퍼니",
+   "title": "[ 디자인 채용 2차 ] BX · UX · UI",
+   "location": "서울 강남구",
+   "employment_type": "정규직·계약직",
+   "experience": "경력무관",
+   "salary": null,
+   "deadline": "2026-11-27",
+   "required": [
+    "대졸 이상"
+   ],
+   "preferred": [],
+   "tools": [],
+   "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=55137615",
+   "source": "사람인",
+   "match_score": 74,
+   "match_reason": "BX·UX·UI 통합 채용으로 벡터 그래픽·UI 역량을 폭넓게 보여줄 수 있음.",
+   "gap": "BX 경험은 굿즈/브랜드 작업 위주.",
+   "prep_tip": "BX 프로젝트와 UI 프로젝트를 균형 있게 구성."
+  },
+  {
+   "rank": 9,
+   "company": "(주)제이더플로어",
+   "title": "제이더플로어 UI/UX디자이너 채용공고",
+   "location": "서울 강남구",
+   "employment_type": "정규직",
+   "experience": "경력무관",
+   "salary": null,
+   "deadline": "2026-10-21",
+   "required": [
+    "초대졸 이상"
+   ],
+   "preferred": [],
+   "tools": [],
+   "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=55092407",
+   "source": "사람인",
+   "match_score": 72,
+   "match_reason": "경력무관 UI/UX 공고로 신입 지원 가능.",
+   "gap": "공고 본문 세부 미확인.",
+   "prep_tip": "Figma 프로토타입 링크를 포트폴리오에 포함."
+  },
+  {
+   "rank": 10,
+   "company": "(주)문토",
+   "title": "[시리즈A/문토] 프로덕트 디자이너(UI/UX) l 문토 팀 (역삼역)",
+   "location": "서울 강남구",
+   "employment_type": "정규직",
+   "experience": "경력무관",
+   "salary": null,
+   "deadline": "2026-10-06",
+   "required": [
+    "대졸 이상"
+   ],
+   "preferred": [],
+   "tools": [],
+   "url": "https://www.saramin.co.kr/zf_user/jobs/relay/view?rec_idx=55136136",
+   "source": "사람인",
+   "match_score": 65,
+   "match_reason": "프로덕트 디자이너 UI/UX 공고. 스타트업 프로덕트 환경 경험 기회.",
+   "gap": "마감 임박(10/06). 프로덕트 경험 격차 가능성.",
+   "prep_tip": "즉시 지원 가능한 UI 사례 3개 준비."
+  }
+ ]
+}
