@@ -8,6 +8,9 @@
 
 ## [Unreleased]
 
+### 추가됨 (Added)
+- `instructors/08-링크드인홍보운영.md`: 교수자 LinkedIn 개인계정 학과 홍보·게시물 운영 PRD (Phase 0~3, Buffer 예약 발행 연동)
+
 ### 추가 예정
 - 실제 기업 DB 연동 시스템
 - GitHub Actions 자동 업데이트 파이프라인
